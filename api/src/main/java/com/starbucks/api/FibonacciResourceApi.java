@@ -6,11 +6,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("v1")
-public class Ping {
+public class FibonacciResourceApi {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/ping")
+    @Path("/fibonacci")
     public String ping() {
         return "Pong!";
     }
