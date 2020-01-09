@@ -1,31 +1,34 @@
 package com.starbucks.api;
 
+import com.starbucks.payload.RegistrationPayload;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("v1")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResourceApi {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/login")
-    public String login() {
-        return "Pong!";
+    public Response login() {
+        return Response.ok().entity("Pong").build();
     }
 
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @POST
     @Path("/register")
-    public String register() {
-        return "Pong!";
+    public Response register(RegistrationPayload payload) {
+        return Response.ok().entity(payload).build();
     }
 
-
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("/logout")
     public String logout() {
         return "Pong!";
@@ -33,7 +36,6 @@ public class UserResourceApi {
 
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("/history")
     public String history() {
         return "Pong!";
@@ -41,7 +43,6 @@ public class UserResourceApi {
 
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("/user")
     public String getAllUsers() {
         return "Pong!";
@@ -49,7 +50,6 @@ public class UserResourceApi {
 
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("/user/{id}")
     public String getUser() {
         return "Pong!";

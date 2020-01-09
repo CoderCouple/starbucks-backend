@@ -31,6 +31,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Jersey -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
@@ -49,11 +50,11 @@
             <version>2.0.1</version>
         </dependency>
 
-        <!-- if you are using Jersey client specific features without the server side -->
+        <!-- Jackson - Jersey Integration -->
         <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>2.28</version>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.23.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
