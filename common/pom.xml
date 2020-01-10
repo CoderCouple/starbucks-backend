@@ -28,6 +28,15 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -71,6 +80,27 @@
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+
+                <!--  http://shengwangi.blogspot.com/2016/04/liquibase-helloworld-example.html -->
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.4.2</version>
+                    <configuration>
+                        <propertyFile>liquibase/liquibase.properties</propertyFile>
+                        <changeLogFile>liquibase/db-changelog-master.xml</changeLogFile>
+                    </configuration>
+                    <!--  I personally prefer run  it manually
+                        <executions>
+                          <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                              <goal>update</goal>
+                            </goals>
+                          </execution>
+                        </executions>
+                        -->
                 </plugin>
             </plugins>
         </pluginManagement>

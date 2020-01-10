@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="Sunil">
+        <sql>
+            CREATE TABLE `Product` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , name VARCHAR (200), cost FLOAT(10,2));
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="Sunil">
+        <sql>
+            CREATE TABLE `Customer` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , firstName VARCHAR (200), lastName varchar(200), street varchar(200), state varchar(2),zip int(5), country varchar(200));
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="Sunil">
+        <sql>
+            CREATE TABLE `Order` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , customer_id int ,Status ENUM('PLACED', 'FULFILLED', 'CANCELED') NOT NULL DEFAULT 'PLACED', total float(10,2), createDate DATETIME, updateDate DATETIME);
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="Sunil">
+        <sql>
+            CREATE TABLE `LineItem` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,order_id int , product_id int,quantity VARCHAR (200));
+        </sql>
+    </changeSet>
+
+    <changeSet id="5" author="Sunil">
+        <sql>
+            ALTER TABLE `LineItem` ADD  FOREIGN KEY(product_id) REFERENCES `Product` (id) ON DELETE CASCADE ON UPDATE CASCADE;
+        </sql>
+    </changeSet>
+
+    <changeSet id="6" author="Sunil">
+        <sql>
+            ALTER TABLE `LineItem` ADD  FOREIGN KEY(order_id) REFERENCES `Order` (id) ON DELETE CASCADE ON UPDATE CASCADE;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
