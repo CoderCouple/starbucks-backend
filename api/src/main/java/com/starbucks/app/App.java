@@ -17,3 +17,12 @@ public class App extends ResourceConfig {
         register(JacksonFeature.class);
     }
 }
+
+
+/*
+* What is the best wat to serialize and deserialize JSON to POJO
+*
+* How to run a dockerized Jetty ?
+*
+* How to build a multistage module in Docker by copying the dependencies
+**/
