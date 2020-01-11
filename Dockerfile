@@ -27,13 +27,15 @@ USER root
 
 RUN mkdir -p /home/jetty && chown -R jetty:jetty /home/jetty
 
+RUN chown -R jetty:jetty /var/lib/jetty/webapps
+
 USER jetty
 
 RUN rm -rf $JETTY_BASE/webapps/*
 
-COPY --from=build app/starbucks-backend/api/target/ROOT.war $JETTY_BASE/webapps/ROOT.war
+COPY --chown=jetty:jetty --from=build app/starbucks-backend/api/target/ROOT.war $JETTY_BASE/webapps/ROOT.war
 
-COPY --from=build app/starbucks-backend/api/target/ROOT $JETTY_BASE/webapps/ROOT
+COPY --chown=jetty:jetty --from=build app/starbucks-backend/api/target/ROOT $JETTY_BASE/webapps/ROOT
 
 #Build the image
 # docker build -t sunil28/starbucks-backend .
