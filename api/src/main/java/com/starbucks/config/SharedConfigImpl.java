@@ -7,58 +7,58 @@ public class SharedConfigImpl implements SharedConfig {
     private ConfigReader configReader;
 
     @Inject
-    public SharedConfigImpl(ConfigReader configReader) {
+    public SharedConfigImpl(final ConfigReader configReader) {
         this.configReader = configReader;
     }
 
     @Override
-    public String getString(String key) {
+    public String getString(final String key) {
         return configReader.config.getString(key);
     }
 
     @Override
-    public String getStringWithDefault(String key, String defaultValue) {
-        return configReader.config.getString(key,defaultValue);
+    public String getStringWithDefault(final String key, final String defaultValue) {
+        return configReader.config.getString(key, defaultValue);
     }
 
     @Override
-    public Integer getInteger(String key) {
+    public Integer getInteger(final String key) {
         return configReader.config.getInt(key);
     }
 
     @Override
-    public Integer getIntegerWithDefault(String key, Integer defaultValue) {
+    public Integer getIntegerWithDefault(final String key, final Integer defaultValue) {
         return configReader.config.getInt(key, defaultValue);
     }
 
     @Override
-    public Boolean getBoolean(String key) {
+    public Boolean getBoolean(final String key) {
         Boolean val =  configReader.config.getBoolean(key);
         return val;
     }
 
     @Override
-    public Boolean getBooleanWithDefault(String key, Boolean defaultValue) {
+    public Boolean getBooleanWithDefault(final String key, final Boolean defaultValue) {
         return configReader.config.getBoolean(key);
     }
 
     @Override
-    public Float getFloat(String key) {
+    public Float getFloat(final String key) {
         return configReader.config.getFloat(key);
     }
 
     @Override
-    public Float getFloatWithDefault(String key, Float defaultValue) {
-        return configReader.config.getFloat(key,defaultValue);
+    public Float getFloatWithDefault(final String key, final Float defaultValue) {
+        return configReader.config.getFloat(key, defaultValue);
     }
 
     @Override
-    public Double getDouble(String key) {
+    public Double getDouble(final String key) {
         return configReader.config.getDouble(key);
     }
 
     @Override
-    public Double getDoubleWithDefault(String key, Double defaultValue) {
-        return configReader.config.getDouble(key,defaultValue);
+    public Double getDoubleWithDefault(final String key, final Double defaultValue) {
+        return configReader.config.getDouble(key, defaultValue);
     }
 }

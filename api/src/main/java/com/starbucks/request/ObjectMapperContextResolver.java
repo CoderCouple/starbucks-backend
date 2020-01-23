@@ -17,7 +17,7 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
     }
 
     @Override
-    public ObjectMapper getContext(Class<?> type) {
+    public ObjectMapper getContext(final Class<?> type) {
         return mapper;
     }
 

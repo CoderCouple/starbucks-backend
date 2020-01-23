@@ -24,7 +24,7 @@ public class UserResourceApi {
 
     @POST
     @Path("/register")
-    public Response register(RegistrationPayload payload) {
+    public Response register(final RegistrationPayload payload) {
         return Response.ok().entity(payload).build();
     }
 

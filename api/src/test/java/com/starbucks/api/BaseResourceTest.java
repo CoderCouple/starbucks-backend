@@ -29,8 +29,8 @@ import java.util.Map;
 import static org.testng.AssertJUnit.fail;
 
 public abstract class BaseResourceTest extends JerseyTest implements TestApiResource {
-    private Map<String,String> queryParams = new HashMap<>();
-    private Map<String,String> headers = new HashMap<>();
+    private Map<String, String> queryParams = new HashMap<>();
+    private Map<String, String> headers = new HashMap<>();
 
     @BeforeClass
     public void runBeforeClass() throws Exception {
@@ -49,43 +49,43 @@ public abstract class BaseResourceTest extends JerseyTest implements TestApiReso
                .builder(TestConfig.class)
                .build()
                .getResourceConfig();
-       forceSet(TestProperties.CONTAINER_PORT,"0");
+       forceSet(TestProperties.CONTAINER_PORT, "0");
        return ServletDeploymentContext
                 .forServlet(new ServletContainer(config))
-                .addFilter(GuiceFilter.class,"guiceFilter")
+                .addFilter(GuiceFilter.class, "guiceFilter")
                 .build();
     }
 
     @Override
-    protected TestContainerFactory getTestContainerFactory(){
+    protected TestContainerFactory getTestContainerFactory() {
         return new GrizzlyWebTestContainerFactory();
     }
 
-    protected void setQueryParam(String key, String val) {
-        this.queryParams.put(key,val);
+    protected void setQueryParam(final String key, final String val) {
+        this.queryParams.put(key, val);
     }
 
-    protected void setHeader(String key, String val) {
-        this.headers.put(key,val);
+    protected void setHeader(final String key, final String val) {
+        this.headers.put(key, val);
     }
 
-    private String getApiVersion(){
+    private String getApiVersion() {
         return ((Path) getResourceClass().getAnnotation(Path.class)).value();
     }
 
     public String getApiResourcePath() {
-        return "/"+getApiVersion()+getResourcePath();
+        return "/" + getApiVersion() + getResourcePath();
     }
 
-    protected Response get(){
+    protected Response get() {
         return get("");
     }
 
-    protected Response get(String subPath){
-        String resourcePath = getApiResourcePath()+subPath;
+    protected Response get(final String subPath) {
+        String resourcePath = getApiResourcePath() + subPath;
         WebTarget target = target(resourcePath);
 
-        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
+        for (final Map.Entry<String, String> entry : queryParams.entrySet()) {
             target = target.queryParam(entry.getKey(), encodeValue(entry.getValue()));
         }
 //
@@ -96,23 +96,23 @@ public abstract class BaseResourceTest extends JerseyTest implements TestApiReso
         return target.request().get();
     }
 
-    protected Response post(String subPath, String json){
-        String resourcePath = getApiResourcePath()+subPath;
+    protected Response post(final String subPath, final String json) {
+        String resourcePath = getApiResourcePath() + subPath;
         WebTarget target = target(resourcePath);
         return target.request().post(Entity.entity(json, MediaType.APPLICATION_JSON_TYPE));
     }
 
-    protected String getResourceAsString(String fileName){
-        InputStream stream = getClass().getResourceAsStream(getResourcePath()+"/"+fileName);
-        try{
-            return IOUtils.toString(stream,StandardCharsets.UTF_8).toString();
-        } catch (IOException e) {
-           fail("Failed to read the file : "+fileName);
+    protected String getResourceAsString(final String fileName) {
+        InputStream stream = getClass().getResourceAsStream(getResourcePath() + "/" + fileName);
+        try {
+            return IOUtils.toString(stream, StandardCharsets.UTF_8).toString();
+        } catch (final IOException e) {
+           fail("Failed to read the file : " + fileName);
            return null;
         }
     }
 
-    protected String encodeValue(String value){
+    protected String encodeValue(final String value) {
         return UrlEscapers.urlFragmentEscaper().escape(value);
     }
 

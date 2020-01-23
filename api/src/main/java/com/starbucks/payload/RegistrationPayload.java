@@ -19,10 +19,10 @@ public class RegistrationPayload {
     private String password;
 
     @JsonCreator
-    public RegistrationPayload(@JsonProperty(value = "firstName", required = true) String firstName,
-                               @JsonProperty(value = "lastName", required = true) String lastName,
-                               @JsonProperty(value = "email", required = true) String email,
-                               @JsonProperty(value = "password", required = true) String password) {
+    public RegistrationPayload(@JsonProperty(value = "firstName", required = true) final String firstName,
+                               @JsonProperty(value = "lastName", required = true) final String lastName,
+                               @JsonProperty(value = "email", required = true) final String email,
+                               @JsonProperty(value = "password", required = true) final String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,7 +33,7 @@ public class RegistrationPayload {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -41,7 +41,7 @@ public class RegistrationPayload {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -49,7 +49,7 @@ public class RegistrationPayload {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -57,7 +57,7 @@ public class RegistrationPayload {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 }

@@ -19,11 +19,11 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("api")
 public class App extends ResourceConfig {
     @Inject
-    public App(ServiceLocator serviceLocator) {
+    public App(final ServiceLocator serviceLocator) {
 
         // Packages to Scan for Jersey
-        packages(true ,"com.starbucks.api");
-        packages(true,"com.starbucks.exception.mapper");
+        packages(true , "com.starbucks.api");
+        packages(true, "com.starbucks.exception.mapper");
 
         // Jackson
         register(ObjectMapperContextResolver.class);
@@ -40,27 +40,28 @@ public class App extends ResourceConfig {
         // OpenAPI Specification (a.k.a Swagger)
     }
 
-    private void initGuiceIntoHK2Bridge(ServiceLocator serviceLocator, Injector injector) {
+    private void initGuiceIntoHK2Bridge(final ServiceLocator serviceLocator, final Injector injector) {
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
         GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
         guiceBridge.bridgeGuiceInjector(injector);
     }
 
-    private boolean isMac(){
-        return System.getProperty("os.name").equalsIgnoreCase("mac os x");
+    private boolean isMac() {
+        return "mac os x".equalsIgnoreCase(System.getProperty("os.name"));
     }
 
-    private Module[] getBaseModule(){
+    private Module[] getBaseModule() {
         return new Module [] {
                 new ServletModule(),
                 new BaseModule()
         };
     }
 
-    private Injector createGuiceInjector(){
-        if(isMac())
+    private Injector createGuiceInjector() {
+        if (isMac()) {
             return Guice.createInjector(getBaseModule());
-        else
-            return Guice.createInjector(Stage.PRODUCTION,getBaseModule());
+        } else {
+            return Guice.createInjector(Stage.PRODUCTION, getBaseModule());
+        }
     }
 }

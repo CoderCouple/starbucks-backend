@@ -9,6 +9,13 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
+  <modules>
+    <module>api</module>
+    <module>common</module>
+    <module>cucumber</module>
+    <module>storm</module>
+  </modules>
+
   <name>starbucks-backend</name>
   <url>http://www.starbucks.com</url>
   <scm>
@@ -24,6 +31,7 @@
     <checkstyleVersion>8.19</checkstyleVersion>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <maven-checkstyle-plugin-version>2.15</maven-checkstyle-plugin-version>
+    <checkstyle.version>6.1.1</checkstyle.version>
   </properties>
 
   <dependencies>
@@ -154,33 +162,52 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-checkstyle-plugin</artifactId>
+           <version>3.1.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.0</version>
-          <configuration>
-            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-            <configLocation>${checkstyle.config.location}</configLocation>
-            <encoding>UTF-8</encoding>
-            <consoleOutput>true</consoleOutput>
-            <failsOnError>false</failsOnError>
-            <includeResources>true</includeResources>
-            <includeTestResources>true</includeTestResources>
-            <violationSeverity>warning</violationSeverity>
-            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <id>validate</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
+          <version>${maven-checkstyle-plugin-version}</version>
+          <!-- Work-around for JDK8 lambda support https://jira.codehaus.org/browse/MCHECKSTYLE-253 -->
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <configuration>
+              <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+              <configLocation>${checkstyle.config.location}</configLocation>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>false</failsOnError>
+              <includeResources>true</includeResources>
+              <includeTestResources>true</includeTestResources>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
   </build>
 
 
