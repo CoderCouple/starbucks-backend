@@ -111,6 +111,13 @@
       <version>2.4</version>
     </dependency>
 
+    <!-- Apache Commons-lang3 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.9</version>
+    </dependency>
+
     <!-- GSON -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
