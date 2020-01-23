@@ -1,3 +1,14 @@
-.idea
+target/
+*.class
+.clover
 *.iml
-**/target
+.idea/
+*.project
+*.DS_STORE
+lib/hash*
+*.log
+target
+.settings
+.checkstyle
+.classpath
+*/test-output

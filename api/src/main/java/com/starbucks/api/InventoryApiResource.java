@@ -13,29 +13,29 @@ import javax.ws.rs.core.Response;
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class OrderResourceApi {
+public class InventoryApiResource {
 
     @GET
-    @Path("/order/{id}")
-    public Response getOrderById() {
+    @Path("/inventory/{id}")
+    public Response getInventoryById() {
         return Response.ok().entity("Pong!").build();
     }
 
     @POST
-    @Path("/order")
-    public Response createOrder() {
+    @Path("/inventory")
+    public Response createInventory() {
         return Response.ok().entity("Pong!").build();
     }
 
     @PUT
-    @Path("/order")
-    public Response updateOrder() {
+    @Path("/inventory")
+    public Response updateInventory() {
         return Response.ok().entity("Pong!").build();
     }
 
     @DELETE
-    @Path("/order")
-    public Response deleteOrder() {
+    @Path("/inventory")
+    public Response deleteInventory() {
         return Response.ok().entity("Pong!").build();
     }
 
