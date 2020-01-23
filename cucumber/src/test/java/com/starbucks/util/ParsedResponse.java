@@ -24,14 +24,14 @@ public class ParsedResponse {
     }
 
     public ParsedResponse setContent(final String content) {
-        if(mime.equalsIgnoreCase(ContentType.APPLICATION_JSON.toString())){
+        if (mime.equalsIgnoreCase(ContentType.APPLICATION_JSON.toString())) {
             try {
                 this.content = new JsonParser().parse(content).getAsJsonObject();
-            } catch (final JsonSyntaxException ex){
-                this.content =null;
+            } catch (final JsonSyntaxException ex) {
+                this.content = null;
             }
         } else {
-            this.content =null;
+            this.content = null;
         }
         return this;
     }
@@ -40,7 +40,7 @@ public class ParsedResponse {
         return mime;
     }
 
-    public ParsedResponse setMime(String mime) {
+    public ParsedResponse setMime(final String mime) {
         this.mime = mime;
         return this;
     }

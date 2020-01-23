@@ -22,17 +22,17 @@ public class RestClient {
     private final List<Header> headers;
     private final HostAndPort hostAndPort;
 
-    public RestClient(TestRunnerContext context) {
+    public RestClient(final TestRunnerContext context) {
         this.httpClient = HttpClientBuilder.create().build();
         this.headers = new ArrayList<>();
         this.hostAndPort = context.getTargetHostAndPort();
     }
 
-    public void addHeader(String key, String val){
-        headers.add(new BasicHeader(key,val));
+    public void addHeader(final String key, final String val) {
+        headers.add(new BasicHeader(key, val));
     }
 
-    public void clearHeaders(){
+    public void clearHeaders() {
         headers.clear();
     }
 
@@ -58,7 +58,7 @@ public class RestClient {
     }
 
 
-    public ParsedResponse executeRequest(HttpRequestBase method) throws IOException {
+    public ParsedResponse executeRequest(final HttpRequestBase method) throws IOException {
         CloseableHttpResponse  response = httpClient.execute(method);
 
         ParsedResponse res = new ParsedResponse();
@@ -75,10 +75,10 @@ public class RestClient {
         return res;
     }
 
-    public String buildCompleteURL(final String url){
+    public String buildCompleteURL(final String url) {
         StringBuilder sb = new StringBuilder("http://");
         sb.append(hostAndPort);
-        if(url.startsWith("/")){
+        if (url.startsWith("/")) {
             sb.append(url);
         } else {
             sb.append("/");

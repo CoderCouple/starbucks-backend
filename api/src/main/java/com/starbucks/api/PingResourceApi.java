@@ -18,13 +18,13 @@ public class PingResourceApi {
     private SharedConfig config;
 
     @Inject
-    public PingResourceApi(SharedConfig config) {
-        this.config=config;
+    public PingResourceApi(final SharedConfig config) {
+        this.config = config;
     }
 
     @GET
     @Path("/ping")
     public Response ping() {
-        return Response.ok().entity("{ \"data\":\"Pong! from "+config.getString("appName")+"\" }").build();
+        return Response.ok().entity("{ \"data\":\"Pong! from " + config.getString("appName") + "\" }").build();
     }
 }

@@ -17,15 +17,15 @@ public class TestConfig extends ResourceConfig {
     public static Injector injector;
 
     @Inject
-    public TestConfig(ServiceLocator serviceLocator) {
-        packages(true,"com.starbucks");
-        property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR,"true");
+    public TestConfig(final ServiceLocator serviceLocator) {
+        packages(true, "com.starbucks");
+        property(ServerProperties.RESPONSE_SET_STATUS_OVER_SEND_ERROR, "true");
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
         GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
 
-        injector= Guice.createInjector(new ServletModule(){
+        injector = Guice.createInjector(new ServletModule() {
             @Override
-            protected void configureServlets(){
+            protected void configureServlets() {
                 install(new ApiMockModule());
             }
         });

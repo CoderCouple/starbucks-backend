@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
-public class PingResourceApiTest extends BaseResourceTest{
+public class PingResourceApiTest extends BaseResourceTest {
 
     private static JsonParser parser = new JsonParser();
     @Override
@@ -23,7 +23,7 @@ public class PingResourceApiTest extends BaseResourceTest{
     }
 
     @DataProvider
-    public Object[][] getPingRequestGood(){
+    public Object[][] getPingRequestGood() {
         return new Object[][]{
                 {"sunil"},
                 {"Payal"}
@@ -31,13 +31,12 @@ public class PingResourceApiTest extends BaseResourceTest{
     }
 
     @Test(dataProvider = "getPingRequestGood")
-    public void testGetPingRequestGood(String username)
-    {
+    public void testGetPingRequestGood(final String username) {
         String expectedResult = getResourceAsString("ping-response.json");
         Response response = get();
         assertNotNull(response);
-        assertEquals(response.getStatus(),200);
-        assertEquals(parser.parse(response.readEntity(String.class)),parser.parse(expectedResult));
+        assertEquals(response.getStatus(), 200);
+        assertEquals(parser.parse(response.readEntity(String.class)), parser.parse(expectedResult));
 
     }
 
