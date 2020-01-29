@@ -1,6 +1,7 @@
 package com.starbucks.api;
 
 import com.starbucks.config.SharedConfig;
+import com.starbucks.service.PingService;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -16,15 +17,18 @@ import javax.ws.rs.core.Response;
 public class PingResourceApi {
 
     private SharedConfig config;
+    private PingService pingService;
 
     @Inject
-    public PingResourceApi(final SharedConfig config) {
+    public PingResourceApi(final SharedConfig config, final PingService pingService) {
         this.config = config;
+        this.pingService = pingService;
     }
 
     @GET
     @Path("/ping")
     public Response ping() {
-        return Response.ok().entity("{ \"data\":\"Pong! from " + config.getString("appName") + "\" }").build();
+        String res = pingService.getPingResponse();
+        return Response.ok().entity("{\"data\":\"" + res + " from " + config.getString("appName") + "\"}").build();
     }
 }

@@ -23,7 +23,7 @@ public class App extends ResourceConfig {
 
         // Packages to Scan for Jersey
         packages(true , "com.starbucks.api");
-        packages(true, "com.starbucks.exception.mapper");
+        //packages(true, "com.starbucks.exception.mapper");
 
         // Jackson
         register(ObjectMapperContextResolver.class);
