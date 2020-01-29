@@ -5,9 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.starbucks</groupId>
-  <artifactId>starbucks-backend</artifactId>
+  <artifactId>starbucks_parent</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <name>starbucks_parent</name>
+  <url>http://www.starbucks.com</url>
 
   <modules>
     <module>api</module>
@@ -16,8 +18,6 @@
     <module>storm</module>
   </modules>
 
-  <name>starbucks-backend</name>
-  <url>http://www.starbucks.com</url>
   <scm>
     <developerConnection>https://github.com/CoderCouple/starbucks-backend.git</developerConnection>
     <tag>HEAD</tag>
