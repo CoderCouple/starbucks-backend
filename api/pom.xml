@@ -3,16 +3,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>starbucks-backend</artifactId>
+        <artifactId>starbucks_parent</artifactId>
         <groupId>com.starbucks</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>api</artifactId>
+    <artifactId>starbucks_api</artifactId>
     <packaging>war</packaging>
-
-    <name>api</name>
+    <name>starbucks_api</name>
     <url>http://www.starbucks.com</url>
 
     <properties>
@@ -90,6 +89,13 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.9.11</version>
+        </dependency>
+
+        <!-- Common Module from the project -->
+        <dependency>
+            <groupId>com.starbucks</groupId>
+            <artifactId>starbucks_common</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

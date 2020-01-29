@@ -39,4 +39,17 @@
         </sql>
     </changeSet>
 
+
+    <changeSet id="7" author="Sunil">
+        <sql>
+            CREATE TABLE `Ping` (`id` int(11) NOT NULL AUTO_INCREMENT, `data` varchar(200) DEFAULT NULL, PRIMARY KEY (`id`));
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="8" author="Sunil">
+        <sql>
+            INSERT INTO `Ping` (`data`) VALUES ('Pong!');
+        </sql>
+    </changeSet>
 </databaseChangeLog>

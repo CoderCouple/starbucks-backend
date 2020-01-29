@@ -35,7 +35,7 @@ public class PingResourceApiTest extends BaseResourceTest {
         String expectedResult = getResourceAsString("ping-response.json");
         Response response = get();
         assertNotNull(response);
-        assertEquals(response.getStatus(), 200);
+        assertEquals(200, response.getStatus());
         assertEquals(parser.parse(response.readEntity(String.class)), parser.parse(expectedResult));
 
     }
