@@ -2,8 +2,8 @@ package com.starbucks.dao;
 
 import com.starbucks.model.Ping;
 import com.starbucks.persistance.DBConn;
-import com.starbucks.persistance.DBConnImpl;
 
+import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
@@ -14,8 +14,9 @@ public class PingDao {
 
     private DBConn conn;
 
-    public PingDao() {
-        this.conn = new DBConnImpl();
+    @Inject
+    public PingDao(final DBConn conn) {
+        this.conn = conn;
     }
 
     public static final String PING_BASE_QUERY = "SELECT id, data FROM Ping;";
@@ -38,7 +39,7 @@ public class PingDao {
                 tx.rollback();
             }
 
-            pm.close();
+            //pm.close();
         }
 
         return p;

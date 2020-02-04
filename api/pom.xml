@@ -63,20 +63,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Apache Commons Configuration 2 for reading the configuration file-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>2.3</version>
-        </dependency>
-
-        <!-- Apache Commons Beanutils needed by Apache Commons Configuration 2 -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
-        </dependency>
-
         <!-- Jersey Test-->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework.providers</groupId>

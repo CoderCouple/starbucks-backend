@@ -28,10 +28,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <checkstyle.skip>false</checkstyle.skip>
-    <checkstyleVersion>8.19</checkstyleVersion>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <maven-checkstyle-plugin-version>2.15</maven-checkstyle-plugin-version>
-    <checkstyle.version>8.18</checkstyle.version>
+    <checkstyle.version>6.1.1</checkstyle.version>
   </properties>
 
   <dependencies>
@@ -126,8 +125,6 @@
     </dependency>
 
   </dependencies>
-
-
 
   <build>
     <pluginManagement>

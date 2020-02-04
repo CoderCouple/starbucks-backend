@@ -8,5 +8,6 @@ public class ServiceModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(PingService.class).to(PingServiceImpl.class);
+
     }
 }
