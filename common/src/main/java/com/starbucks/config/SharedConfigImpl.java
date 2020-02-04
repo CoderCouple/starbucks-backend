@@ -1,12 +1,9 @@
 package com.starbucks.config;
 
-import com.google.inject.Inject;
-
 public class SharedConfigImpl implements SharedConfig {
 
     private ConfigReader configReader;
 
-    @Inject
     public SharedConfigImpl(final ConfigReader configReader) {
         this.configReader = configReader;
     }

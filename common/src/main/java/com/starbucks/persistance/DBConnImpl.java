@@ -1,19 +1,36 @@
 package com.starbucks.persistance;
 
+import com.starbucks.config.SharedConfig;
+
+import javax.inject.Inject;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-import java.io.File;
+import java.util.Properties;
 
 public class DBConnImpl implements DBConn {
+    private SharedConfig config;
+    private PersistenceManagerFactory pmf;
+    private  PersistenceManager pm;
 
-    private final static File FILE = new File("/Users/sunil28/Desktop/Projects/starbucks-backend/common/src/main/resources/liquibase/db.properties");
-    private static PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory(FILE);
-    private static PersistenceManager pm = pmf.getPersistenceManager();
-
+    @Inject
+    public DBConnImpl(final SharedConfig config) {
+        this.config = config;
+        pmf = JDOHelper.getPersistenceManagerFactory(getDBProperties(config));
+        pm = pmf.getPersistenceManager();
+    }
 
     @Override
     public PersistenceManager getPmp() {
         return pm;
+    }
+
+    private Properties getDBProperties(final SharedConfig config) {
+        Properties properties = new Properties();
+        properties.setProperty("javax.jdo.option.ConnectionDriverName", config.getString("datanucleus.ConnectionDriverName"));
+        properties.setProperty("javax.jdo.option.ConnectionURL", config.getString("datanucleus.ConnectionURL"));
+        properties.setProperty("javax.jdo.option.ConnectionUserName", config.getString("datanucleus.ConnectionUserName"));
+        properties.setProperty("javax.jdo.option.ConnectionPassword", config.getString("datanucleus.ConnectionPassword"));
+        return properties;
     }
 }

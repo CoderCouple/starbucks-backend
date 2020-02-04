@@ -5,7 +5,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.ServletModule;
-import com.starbucks.guice.BaseModule;
+import com.starbucks.guice.ApiBaseModule;
 import com.starbucks.request.ObjectMapperContextResolver;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -53,7 +53,7 @@ public class App extends ResourceConfig {
     private Module[] getBaseModule() {
         return new Module [] {
                 new ServletModule(),
-                new BaseModule()
+                new ApiBaseModule()
         };
     }
 

@@ -30,12 +30,13 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!-- MySQL connector for connecting to mysql using java to deploy liquibase changes -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
         </dependency>
+        <!-- Datanucleus  for JDO-->
 
         <dependency>
             <groupId>org.datanucleus</groupId>
@@ -56,6 +57,20 @@
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-rdbms</artifactId>
             <version>${datanucleus.version}</version>
+        </dependency>
+
+        <!-- Apache Commons Configuration 2 for reading the configuration file-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <!-- Apache Commons Beanutils needed by Apache Commons Configuration 2 -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
         </dependency>
 
     </dependencies>

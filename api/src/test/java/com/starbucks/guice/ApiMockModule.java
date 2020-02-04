@@ -1,6 +1,7 @@
 package com.starbucks.guice;
 
 import com.google.inject.AbstractModule;
+import com.starbucks.modules.ConfigReaderModule;
 import com.starbucks.modules.TestServiceModule;
 
 public class ApiMockModule extends AbstractModule {
