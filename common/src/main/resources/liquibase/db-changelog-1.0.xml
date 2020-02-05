@@ -52,4 +52,95 @@
             INSERT INTO `Ping` (`data`) VALUES ('Pong!');
         </sql>
     </changeSet>
+
+
+    <changeSet id="9" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `email` VARCHAR(40) AFTER `lastName`;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="10" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `password` VARCHAR(40) AFTER `email`;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="11" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `isActive` VARCHAR(40) AFTER `password`;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="12" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `created` VARCHAR(40) AFTER `isActive`;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="13" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `updated` VARCHAR(40) AFTER `created`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="14" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` ADD COLUMN `dateOfBirth` VARCHAR(40) AFTER `password`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="15" author="Sunil">
+        <sql>
+            ALTER TABLE `Customer` RENAME TO `User`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="16" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `dateOfBirth` DATE;
+        </sql>
+    </changeSet>
+
+    <changeSet id="17" author="Sunil">
+        <sql>
+            ALTER TABLE `User` ADD COLUMN `guid` VARCHAR(40) AFTER `id`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="18" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `created` DATETIME;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="19" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `updated` DATETIME;
+        </sql>
+    </changeSet>
+
+    <changeSet id="20" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `isActive` BOOLEAN;
+        </sql>
+    </changeSet>
+
+    <changeSet id="21" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `email` VARCHAR(200);
+        </sql>
+    </changeSet>
+
+    <changeSet id="22" author="Sunil">
+        <sql>
+            ALTER TABLE `User` MODIFY `password` VARCHAR(200);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

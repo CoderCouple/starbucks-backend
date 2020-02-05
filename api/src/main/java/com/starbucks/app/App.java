@@ -35,7 +35,7 @@ public class App extends ResourceConfig {
 
         // Register Filters
 
-        // CORS
+        // CORSFilter
 
         // OpenAPI Specification (a.k.a Swagger)
     }

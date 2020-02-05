@@ -73,6 +73,14 @@
             <version>1.9.3</version>
         </dependency>
 
+        <!-- For validating the properties in the Model classes -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
