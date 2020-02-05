@@ -1,5 +1,6 @@
 package com.starbucks.model;
 
+import com.starbucks.dao.PersistentObject;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,9 +13,7 @@ import java.io.Serializable;
 import java.util.StringTokenizer;
 
 @PersistenceCapable(detachable = "true", table = "Ping", objectIdClass = Ping.PK.class)
-public class Ping {
-
-    private static final String DELIMITER = "$";
+public class Ping  implements PersistentObject {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
     private int id;
@@ -77,6 +76,16 @@ public class Ping {
                 .append("id", id)
                 .append("data", data)
                 .toString();
+    }
+
+    @Override
+    public Object primaryKey() {
+        return id;
+    }
+
+    @Override
+    public void markForDeletion() {
+
     }
 
 
