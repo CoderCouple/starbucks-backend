@@ -3,23 +3,34 @@ package com.starbucks.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.starbucks.Utils;
+import com.starbucks.exception.InvalidFieldValueException;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
+@ApiModel
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RegistrationPayload {
+
     @JsonProperty("firstName")
+    @ApiModelProperty(value = "firstName", example = "Sunil")
     private String firstName;
 
     @JsonProperty("lastName")
+    @ApiModelProperty(value = "lastName", example = "Tiwari")
     private String lastName;
 
     @JsonProperty("email")
+    @ApiModelProperty(value = "email", example = "sunil28071987@gmail.com")
     private String email;
 
     @JsonProperty("password")
+    @ApiModelProperty(value = "password", example = "Sunil@28")
     private String password;
 
     @JsonProperty("dob")
+    @ApiModelProperty(value = "dob", example = "1987-07-28")
     private String dob;
 
     @JsonCreator
@@ -33,6 +44,14 @@ public class RegistrationPayload {
         this.email = email;
         this.password = password;
         this.dob = dob;
+
+        if (!Utils.isValidEmailAddress(email)) {
+            throw  new InvalidFieldValueException("Invalid email address format");
+        }
+
+        if (!Utils.isValidDate(dob)) {
+            throw  new InvalidFieldValueException("Invalid date format");
+        }
     }
 
     public String getFirstName() {

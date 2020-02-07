@@ -41,7 +41,7 @@ public class App extends ResourceConfig {
 
         // CORSFilter
 
-        // OpenAPI Specification (a.k.a Swagger)
+        // Swagger
         register(ApiListingResource.class);
         register(SwaggerSerializers.class);
         setUpSwagger();
@@ -49,6 +49,9 @@ public class App extends ResourceConfig {
         //Tracing
         property(ServerProperties.TRACING, "ON_DEMAND");
         property(ServerProperties.TRACING_THRESHOLD, "VERBOSE");
+
+        //Jersey BeanValidation
+        property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
 
     }
 
