@@ -2,7 +2,6 @@ package com.starbucks.service;
 
 import com.starbucks.dao.UserDao;
 import com.starbucks.model.User;
-import com.starbucks.util.Utils;
 import com.starbucks.view.UserView;
 
 import javax.inject.Inject;
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService {
                 .setLastName(payload.get("lastName"))
                 .setEmail(payload.get("email"))
                 .setPassword(payload.get("password"))
-                .setDateOfBirth(new Date(Utils.getUTCTimestamp(payload.get("dob")).getTime()))
+                .setDateOfBirth(Date.valueOf(payload.get("dob")))
                 .setIsActive(true);
 
         return userDao.createUserIfDoesNotExist(user);

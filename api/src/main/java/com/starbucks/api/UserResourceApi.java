@@ -9,8 +9,11 @@ import com.starbucks.service.UserService;
 import com.starbucks.view.UserView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -38,8 +41,15 @@ public class UserResourceApi {
 
     @POST
     @Path("user/register")
-    @ApiOperation(value = "Register the user ")
-    public Response register(final RegistrationPayload payload) {
+    @ApiOperation(value = "User Registration API",
+    notes = "This API allows a user to register himself in the system",
+    response = UserView.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Missing Required Field"),
+            @ApiResponse(code = 401, message = "User already exists in the system")
+    })
+    public Response register(@Valid final RegistrationPayload payload) {
         Map<String, String> userPayload = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
         UserView user =  userService.registerUser(userPayload);
         return Response.ok().entity(user).build();
