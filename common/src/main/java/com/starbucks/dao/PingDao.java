@@ -32,7 +32,6 @@ public class PingDao {
             q.setResultClass(Ping.class);
             q.setUnique(true);
             p = (Ping) q.execute();
-            System.out.println(p.toString());
             tx.commit();
         } finally {
             if (tx.isActive()) {

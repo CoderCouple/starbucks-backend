@@ -7,9 +7,13 @@ import com.google.inject.Stage;
 import com.google.inject.servlet.ServletModule;
 import com.starbucks.guice.ApiBaseModule;
 import com.starbucks.request.ObjectMapperContextResolver;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
@@ -38,6 +42,14 @@ public class App extends ResourceConfig {
         // CORSFilter
 
         // OpenAPI Specification (a.k.a Swagger)
+        register(ApiListingResource.class);
+        register(SwaggerSerializers.class);
+        setUpSwagger();
+
+        //Tracing
+        property(ServerProperties.TRACING, "ON_DEMAND");
+        property(ServerProperties.TRACING_THRESHOLD, "VERBOSE");
+
     }
 
     private void initGuiceIntoHK2Bridge(final ServiceLocator serviceLocator, final Injector injector) {
@@ -63,5 +75,18 @@ public class App extends ResourceConfig {
         } else {
             return Guice.createInjector(Stage.PRODUCTION, getBaseModule());
         }
+    }
+
+    private BeanConfig setUpSwagger() {
+        BeanConfig beanConfig = new BeanConfig();
+        beanConfig.setVersion("1.0.2");
+        beanConfig.setSchemes(new String[]{"http"});
+        beanConfig.setHost("localhost:8080");
+        beanConfig.setBasePath("/api");
+        beanConfig.setResourcePackage("com.starbucks.api");
+        beanConfig.setDescription("Provides the list of starbucks backend Apis");
+        beanConfig.setTitle("Starbucks Backend API");
+        beanConfig.setScan(true);
+        return beanConfig;
     }
 }

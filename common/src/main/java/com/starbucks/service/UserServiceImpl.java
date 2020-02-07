@@ -3,6 +3,7 @@ package com.starbucks.service;
 import com.starbucks.dao.UserDao;
 import com.starbucks.model.User;
 import com.starbucks.util.Utils;
+import com.starbucks.view.UserView;
 
 import javax.inject.Inject;
 import java.sql.Date;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(final Map<String, String> payload) {
+    public UserView registerUser(final Map<String, String> payload) {
         User user = new User()
                 .setFirstName(payload.get("firstName"))
                 .setGuid(UUID.randomUUID().toString())

@@ -1,11 +1,11 @@
 package com.starbucks.service;
 
 
-import com.starbucks.model.User;
+import com.starbucks.view.UserView;
 
 import java.util.Map;
 
 public interface UserService {
 
-    User registerUser(Map<String, String> payload);
+    UserView registerUser(Map<String, String> payload);
 }

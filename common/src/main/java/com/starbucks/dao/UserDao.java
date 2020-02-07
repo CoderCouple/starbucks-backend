@@ -2,6 +2,7 @@ package com.starbucks.dao;
 
 import com.starbucks.model.User;
 import com.starbucks.persistance.DBConn;
+import com.starbucks.view.UserView;
 
 import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
@@ -18,7 +19,7 @@ public class UserDao extends BaseDao {
 
     public static final String USER_BASE_QUERY = "SELECT * FROM User;";
 
-    public User createUserIfDoesNotExist(final User user) {
+    public UserView createUserIfDoesNotExist(final User user) {
         PersistenceManager pm = conn.getPmp();
         Transaction tx = pm.currentTransaction();
         User userRecord = null;
@@ -33,6 +34,6 @@ public class UserDao extends BaseDao {
 
         }
 
-        return userRecord;
+        return new UserView(userRecord);
     }
 }
