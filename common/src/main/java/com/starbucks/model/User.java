@@ -1,6 +1,7 @@
 package com.starbucks.model;
 
 import com.starbucks.dao.PersistentObject;
+import com.starbucks.util.Utils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -123,11 +124,6 @@ public class User implements PersistentObject {
         return this;
     }
 
-//    public User setDateOfBirth(final String dateOfBirth) {
-//        this.dateOfBirth = Date.valueOf(dateOfBirth);
-//        return this;
-//    }
-
     public boolean getIsActive() {
         return isActive;
     }
@@ -153,6 +149,20 @@ public class User implements PersistentObject {
     public User setUpdated(final Timestamp updated) {
         this.updated = updated;
         return this;
+    }
+
+    public static User sample() {
+        return new User()
+                .setId(1)
+                .setGuid("guid")
+                .setFirstName("fname")
+                .setLastName("lname")
+                .setEmail("email")
+                .setPassword("pwd")
+                .setDateOfBirth(new Date(1580875529))
+                .setIsActive(true)
+                .setCreated(Utils.getUTCTimestamp("2020-01-01 01:01:01"))
+                .setUpdated(Utils.getUTCTimestamp("2020-01-01 01:01:01"));
     }
 
     @Override

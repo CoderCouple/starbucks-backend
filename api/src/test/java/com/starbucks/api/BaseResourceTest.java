@@ -32,6 +32,7 @@ public abstract class BaseResourceTest extends JerseyTest implements TestApiReso
     private Map<String, String> queryParams = new HashMap<>();
     private Map<String, String> headers = new HashMap<>();
 
+    
     @BeforeClass
     public void runBeforeClass() throws Exception {
         super.setUp();

@@ -3,10 +3,12 @@ package com.starbucks.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.starbucks.config.SharedConfig;
-import com.starbucks.model.User;
 import com.starbucks.payload.LoginPayload;
 import com.starbucks.payload.RegistrationPayload;
 import com.starbucks.service.UserService;
+import com.starbucks.view.UserView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -19,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
+@Api(value = "User")
 @Path("v1")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -35,10 +38,10 @@ public class UserResourceApi {
 
     @POST
     @Path("user/register")
+    @ApiOperation(value = "Register the user ")
     public Response register(final RegistrationPayload payload) {
         Map<String, String> userPayload = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
-
-        User user =  userService.registerUser(userPayload);
+        UserView user =  userService.registerUser(userPayload);
         return Response.ok().entity(user).build();
     }
 
