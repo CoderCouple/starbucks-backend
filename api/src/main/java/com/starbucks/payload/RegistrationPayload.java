@@ -14,23 +14,23 @@ import io.swagger.annotations.ApiModelProperty;
 public class RegistrationPayload {
 
     @JsonProperty("firstName")
-    @ApiModelProperty(value = "firstName", example = "Sunil")
+    @ApiModelProperty(value = "firstName", example = "fName")
     private String firstName;
 
     @JsonProperty("lastName")
-    @ApiModelProperty(value = "lastName", example = "Tiwari")
+    @ApiModelProperty(value = "lastName", example = "lName")
     private String lastName;
 
     @JsonProperty("email")
-    @ApiModelProperty(value = "email", example = "sunil28071987@gmail.com")
+    @ApiModelProperty(value = "email", example = "test.user@gmail.com")
     private String email;
 
     @JsonProperty("password")
-    @ApiModelProperty(value = "password", example = "Sunil@28")
+    @ApiModelProperty(value = "password", example = "Password@1")
     private String password;
 
     @JsonProperty("dob")
-    @ApiModelProperty(value = "dob", example = "1987-07-28")
+    @ApiModelProperty(value = "dob", example = "1971-07-28")
     private String dob;
 
     @JsonCreator
@@ -46,11 +46,11 @@ public class RegistrationPayload {
         this.dob = dob;
 
         if (!Utils.isValidEmailAddress(email)) {
-            throw  new InvalidFieldValueException("Invalid email address format");
+            throw  new InvalidFieldValueException("Invalid email address format. Please try again!!!");
         }
 
         if (!Utils.isValidDate(dob)) {
-            throw  new InvalidFieldValueException("Invalid date format");
+            throw  new InvalidFieldValueException("Invalid date format. Please try again!!!");
         }
     }
 

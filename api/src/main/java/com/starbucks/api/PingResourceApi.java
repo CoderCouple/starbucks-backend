@@ -3,6 +3,9 @@ package com.starbucks.api;
 import com.starbucks.config.SharedConfig;
 import com.starbucks.service.PingService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -12,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api(value = "Test")
+@Api(value = "Health Check")
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -29,6 +32,14 @@ public class PingResourceApi {
 
     @GET
     @Path("/ping")
+    @ApiOperation(value = "Ping Api",
+    notes = "Simple Ping API for health check",
+    response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     public Response ping() {
         String res = pingService.getPingResponse();
         return Response.ok().entity("{\"data\":\"" + res + " from " + config.getString("appName") + "\"}").build();
