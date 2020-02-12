@@ -6,6 +6,8 @@ import com.starbucks.config.SharedConfig;
 import com.starbucks.payload.LoginPayload;
 import com.starbucks.payload.RegistrationPayload;
 import com.starbucks.service.UserService;
+import com.starbucks.view.UserOrderHistoryView;
+import com.starbucks.view.UserProfileView;
 import com.starbucks.view.UserView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,40 +49,77 @@ public class UserResourceApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "Missing Required Field"),
-            @ApiResponse(code = 401, message = "User already exists in the system")
+            @ApiResponse(code = 400, message = "Invalid Field Value"),
+            @ApiResponse(code = 400, message = "Duplicate User Found")
     })
     public Response register(@Valid final RegistrationPayload payload) {
-        Map<String, String> userPayload = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
-        UserView user =  userService.registerUser(userPayload);
+        Map<String, String> registrationPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
+        UserView user =  userService.registerUser(registrationPayloadMap);
         return Response.ok().entity(user).build();
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("user/login")
+    @ApiOperation(value = "User Login API",
+    notes = "This API let's user login into the system using the Email and Password as credentials.",
+    response = UserProfileView.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "User Not Found"),
+            @ApiResponse(code = 401, message = "Unauthorized User")
+    })
     public Response login(final LoginPayload payload) {
-        return Response.ok().entity("Pong").build();
+        Map<String, String> loginPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
+        UserProfileView userProfileView =  userService.loginUser(loginPayloadMap);
+        return Response.ok().entity(userProfileView).build();
     }
 
     @GET
     @Path("user/logout/{userId}")
+    @ApiOperation(value = "User Logout API",
+    notes = "This API lets user log out of the system",
+    response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "User Not Found")
+    })
     public Response logout(@PathParam("userId") final int userId) {
-        return Response.ok().entity("Pong").build();
-    }
-
-
-    @GET
-    @Path("user/history/{userId}")
-    public Response history(@PathParam("userId") final int userId) {
-        return Response.ok().entity("Pong").build();
+        boolean isSuccessful =  userService.logoutUser(userId);
+        if (isSuccessful) {
+            return Response.ok().entity("{ \"data\" : " + "\"User successfully logged out !!!\"" + " }").build();
+        } else {
+            return Response.ok().entity("{ \"data\" : " + "\"User logged out failed !!!\"" + " }").build();
+        }
     }
 
 
     @GET
     @Path("/user/{userId}")
+    @ApiOperation(value = "Get User Details By UserID",
+            notes = "This API fetches the user details by sing userId as input",
+            response = UserView.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200 , message = "OK"),
+            @ApiResponse(code = 404, message = "User Not Found")
+    })
     public Response getUser(@PathParam("userId") final int userId) {
-        return Response.ok().entity("Pong").build();
+        UserView userView =  userService.getUserById(userId);
+        return Response.ok().entity(userView).build();
     }
 
 
+    @GET
+    @Path("user/history/{userId}")
+    @ApiOperation(value = "User Order History API",
+    notes = "This API is used to fetch user order history",
+    response = UserOrderHistoryView.class,
+    responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "User Not Found")
+    })
+    public Response history(@PathParam("userId") final int userId) {
+        UserOrderHistoryView userOrderHistoryView =  userService.getUserHistory(userId);
+        return Response.ok().entity(userOrderHistoryView).build();
+    }
 }

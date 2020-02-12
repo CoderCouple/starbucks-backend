@@ -143,4 +143,34 @@
         </sql>
     </changeSet>
 
+    <changeSet id="23" author="Sunil">
+        <sql>
+            ALTER TABLE `User` DROP COLUMN `street`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="24" author="Sunil">
+        <sql>
+            ALTER TABLE `User` DROP COLUMN `zip`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="25" author="Sunil">
+        <sql>
+            ALTER TABLE `User` DROP COLUMN `state`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="26" author="Sunil">
+        <sql>
+            ALTER TABLE `User` DROP COLUMN `country`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="27" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` CHANGE COLUMN `customer_id` `userId` int;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
