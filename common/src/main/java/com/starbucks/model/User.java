@@ -225,12 +225,12 @@ public class User implements PersistentObject {
 
     @Override
     public Object primaryKey() {
-        return id;
+        return getId();
     }
 
     @Override
     public void markForDeletion() {
-
+        this.setIsActive(Boolean.FALSE);
     }
 
     public static class PK implements Serializable {

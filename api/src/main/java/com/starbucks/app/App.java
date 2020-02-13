@@ -25,9 +25,9 @@ public class App extends ResourceConfig {
     @Inject
     public App(final ServiceLocator serviceLocator) {
 
-        // Packages to Scan for Jersey
+        // Packages to Scan for Jersey Resources
         packages(true , "com.starbucks.api");
-        //packages(true, "com.starbucks.exception.mapper");
+        packages(true, "com.starbucks.exception.mapper");
 
         // Jackson
         register(ObjectMapperContextResolver.class);
