@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,17 +27,35 @@ public class UserDao extends BaseDao {
         this.conn = conn;
     }
 
-    public static final String USER_BASE_QUERY =    "SELECT * FROM `User` u";
+    public static final String USER_BASE_QUERY =    "SELECT u.id as id, " +
+            "u.guid as guid, " +
+            "u.firstName as firstName, " +
+            "u.lastName as lastName, " +
+            "u.email as email, " +
+            "u.password as password, " +
+            "u.dateOfBirth as dateOfBirth, " +
+            "u.isActive as isActive, " +
+            "u.created as created, " +
+            "u.updated as updated " +
+            "FROM `User` u ";
 
-    public static final String GET_USER_BY_EMAIL = USER_BASE_QUERY + " WHERE u.email = :email";
+    public static final String ORDER_BASE_QUERY = "SELECT o.id as id, " +
+            "o.transactionId as transactionId, " +
+            "o.userId as userId, " +
+            "o.status as status, " +
+            "o.total as total, " +
+            "o.purchaseDate as purchaseDate, " +
+            "o.created as created, " +
+            "o.updated as updated " +
+            "FROM `Order` o ";
 
-    public static final String GET_USER_BY_USER_ID = USER_BASE_QUERY + " WHERE u.id = :userId";
+    public static final String GET_USER_BY_EMAIL = USER_BASE_QUERY + "WHERE u.email = :email";
 
-    public static final String ORDER_BASE_QUERY = "Select * from `Order` o , User u";
+    public static final String GET_USER_BY_USER_ID = USER_BASE_QUERY + "WHERE u.id = :userId";
 
-    public static final String GET_USER_ORDERS_BY_USER_ID = ORDER_BASE_QUERY + " WHERE u.id = o.userId AND 0.userId = :userId";
+    public static final String GET_USER_ORDERS_BY_USER_ID = ORDER_BASE_QUERY + "WHERE o.userId = :userId";
 
-    public UserView createUserIfDoesNotExist(final User user) {
+    public UserView createUserIfDoesNotExist(final User user) throws SQLIntegrityConstraintViolationException {
         PersistenceManager pm = conn.getPmp();
         Transaction tx = pm.currentTransaction();
         User userRecord = null;
@@ -63,10 +82,11 @@ public class UserDao extends BaseDao {
         parameters.put("email", email);
 
         User userRecord = null;
-        Query query = pm.newQuery(SQL, GET_USER_BY_EMAIL);
-        query.setResultClass(User.class);
-        query.setUnique(true);
-        userRecord  = (User) query.executeWithMap(parameters);
+
+            Query query = pm.newQuery(SQL, GET_USER_BY_EMAIL);
+            query.setResultClass(User.class);
+            query.setUnique(true);
+            userRecord = (User) query.executeWithMap(parameters);
 
         return Optional.ofNullable(userRecord);
     }

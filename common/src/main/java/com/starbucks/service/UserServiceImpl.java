@@ -1,6 +1,7 @@
 package com.starbucks.service;
 
 import com.starbucks.dao.UserDao;
+import com.starbucks.exception.DuplicateUserException;
 import com.starbucks.exception.UnauthorizedUserException;
 import com.starbucks.exception.UserNotFoundException;
 import com.starbucks.model.Order;
@@ -27,7 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserView registerUser(final Map<String, String> payload) {
+    public UserView registerUser(final Map<String, String> payload) throws DuplicateUserException {
+        UserView userView = null;
         User user = new User()
                 .setFirstName(payload.get("firstName"))
                 .setGuid(UUID.randomUUID().toString())
@@ -37,7 +39,13 @@ public class UserServiceImpl implements UserService {
                 .setDateOfBirth(Date.valueOf(payload.get("dob")))
                 .setIsActive(true);
 
-        return userDao.createUserIfDoesNotExist(user);
+        try {
+             userView = userDao.createUserIfDoesNotExist(user);
+        } catch (final Exception ex) {
+            throw new DuplicateUserException("Duplicate User Found");
+        }
+
+        return userView;
     }
 
     @Override
@@ -58,6 +66,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean logoutUser(final int userId) {
+        Optional<User> user = userDao.fetchUserById(userId);
+        if (!user.isPresent()) {
+            throw new UserNotFoundException("User not found in DB");
+        }
         return true;
     }
 
@@ -72,6 +84,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserOrderHistoryView getUserHistory(final int userId) {
+        Optional<User> user = userDao.fetchUserById(userId);
+        if (!user.isPresent()) {
+            throw new UserNotFoundException("User not found in DB");
+        }
         List<Order> orders = userDao.fetchUserHistoryById(userId);
         return new UserOrderHistoryView(userId, orders);
     }

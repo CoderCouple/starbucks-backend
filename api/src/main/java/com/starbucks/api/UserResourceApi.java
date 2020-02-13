@@ -48,8 +48,6 @@ public class UserResourceApi {
     response = UserView.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 400, message = "Missing Required Field"),
-            @ApiResponse(code = 400, message = "Invalid Field Value"),
             @ApiResponse(code = 400, message = "Duplicate User Found")
     })
     public Response register(@Valid final RegistrationPayload payload) {
@@ -95,7 +93,7 @@ public class UserResourceApi {
 
     @GET
     @Path("/user/{userId}")
-    @ApiOperation(value = "Get User Details By UserID",
+    @ApiOperation(value = "Get User By Id API",
             notes = "This API fetches the user details by sing userId as input",
             response = UserView.class)
     @ApiResponses(value = {

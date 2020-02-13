@@ -7,7 +7,6 @@ import com.starbucks.view.UserProfileView;
 import com.starbucks.view.UserView;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class UserServiceMockImpl implements UserService {
@@ -18,9 +17,7 @@ public class UserServiceMockImpl implements UserService {
 
     @Override
     public UserProfileView loginUser(final Map<String, String> payload) {
-        Order order = new Order();
-        List<Order> orderList = Arrays.asList(order);
-        return new UserProfileView(User.sample(), orderList);
+        return new UserProfileView(User.sample(), Arrays.asList(Order.sample()));
     }
 
     @Override
@@ -35,8 +32,6 @@ public class UserServiceMockImpl implements UserService {
 
     @Override
     public UserOrderHistoryView getUserHistory(final int userId) {
-        Order order = new Order();
-        List<Order> orderList = Arrays.asList(order);
-        return new UserOrderHistoryView(userId, orderList);
+        return new UserOrderHistoryView(userId, Arrays.asList(Order.sample()));
     }
 }

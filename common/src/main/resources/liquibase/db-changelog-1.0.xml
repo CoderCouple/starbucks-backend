@@ -173,4 +173,125 @@
         </sql>
     </changeSet>
 
+    <changeSet id="28" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` ADD COLUMN `transactionId` VARCHAR(40) AFTER `id`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="29" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` ADD COLUMN `purchaseDate` DATETIME AFTER `total`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="30" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` DROP COLUMN `Status`;
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="31" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` ADD COLUMN `status` enum('PLACED','BLOCKED','FULFILLED','CANCELED') NOT NULL DEFAULT 'PLACED' AFTER `userId`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="32" author="Sunil">
+        <sql>
+            ALTER TABLE `User` ADD CONSTRAINT UK_Email UNIQUE (email);
+        </sql>
+    </changeSet>
+
+    <changeSet id="33" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` ADD CONSTRAINT UK_TransactionId UNIQUE (transactionId);
+        </sql>
+    </changeSet>
+
+    <changeSet id="34" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` ADD COLUMN `totalQuantity` int AFTER `cost`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="35" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` ADD COLUMN `isActive` BOOLEAN AFTER `totalQuantity`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="36" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` ADD COLUMN `createDate` DATETIME AFTER `isActive`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="37" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` ADD COLUMN `updateDate` DATETIME AFTER `createDate`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="38" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` CHANGE COLUMN `updateDate` `updateDate`  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="39" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` CHANGE COLUMN `createDate` `createDate`  DATETIME DEFAULT CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="40" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` CHANGE COLUMN `isActive` `isActive` BOOLEAN DEFAULT '1';
+        </sql>
+    </changeSet>
+
+    <changeSet id="41" author="Sunil">
+        <sql>
+            ALTER TABLE `User` CHANGE COLUMN `updated` `updated`  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="42" author="Sunil">
+        <sql>
+            ALTER TABLE `User` CHANGE COLUMN `created` `created`  DATETIME DEFAULT CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="43" author="Sunil">
+        <sql>
+            ALTER TABLE `User` CHANGE COLUMN `isActive` `isActive` BOOLEAN DEFAULT '1';
+        </sql>
+    </changeSet>
+
+    <changeSet id="44" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` CHANGE COLUMN `updateDate` `updated`  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="45" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` CHANGE COLUMN `createDate` `created`  DATETIME DEFAULT CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="46" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` CHANGE COLUMN `updateDate` `updated`  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
+    <changeSet id="47" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` CHANGE COLUMN `createDate` `created`  DATETIME DEFAULT CURRENT_TIMESTAMP;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
