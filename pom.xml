@@ -30,7 +30,7 @@
     <checkstyle.skip>false</checkstyle.skip>
     <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
     <maven-checkstyle-plugin-version>2.15</maven-checkstyle-plugin-version>
-    <checkstyle.version>6.1.1</checkstyle.version>
+    <checkstyle.version>8.29</checkstyle.version>
   </properties>
 
   <dependencies>
