@@ -1,7 +1,8 @@
-package com.starbucks.service;
+package com.starbucks.service.mock;
 
 import com.starbucks.model.Order;
 import com.starbucks.model.User;
+import com.starbucks.service.UserService;
 import com.starbucks.view.UserOrderHistoryView;
 import com.starbucks.view.UserProfileView;
 import com.starbucks.view.UserView;

@@ -32,85 +32,35 @@ public class OrderView {
         return id;
     }
 
-    public OrderView setId(final int id) {
-        this.id = id;
-        return this;
-    }
-
     public String getTransactionId() {
         return transactionId;
-    }
-
-    public OrderView setTransactionId(final String transactionId) {
-        this.transactionId = transactionId;
-        return this;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public OrderView setUserId(final int userId) {
-        this.userId = userId;
-        return this;
-    }
-
     public int getInventoryId() {
         return inventoryId;
-    }
-
-    public OrderView setInventoryId(final int inventoryId) {
-        this.inventoryId = inventoryId;
-        return this;
     }
 
     public Order.Status getStatus() {
         return status;
     }
 
-    public OrderView setStatus(final Order.Status status) {
-        this.status = status;
-        return this;
-    }
-
-    public OrderView setStatus(final String status) {
-        this.status = Order.Status.valueOf(status);
-        return this;
-    }
-
     public double getTotal() {
         return total;
-    }
-
-    public OrderView setTotal(final double total) {
-        this.total = total;
-        return this;
     }
 
     public Timestamp getPurchaseDate() {
         return purchaseDate;
     }
 
-    public OrderView setPurchaseDate(final Timestamp purchaseDate) {
-        this.purchaseDate = purchaseDate;
-        return this;
-    }
-
     public Timestamp getCreated() {
         return created;
     }
 
-    public OrderView setCreated(final Timestamp created) {
-        this.created = created;
-        return this;
-    }
-
     public Timestamp getUpdated() {
         return updated;
-    }
-
-    public OrderView setUpdated(final Timestamp updated) {
-        this.updated = updated;
-        return this;
     }
 }

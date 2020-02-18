@@ -9,12 +9,12 @@ import javax.ws.rs.core.Response;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 
-public class PingResourceApiTest extends BaseResourceTest {
+public class PingApiResourceTest extends BaseResourceTest {
 
     private static JsonParser parser = new JsonParser();
     @Override
     public Class getResourceClass() {
-        return PingResourceApi.class;
+        return PingApiResource.class;
     }
 
     @Override

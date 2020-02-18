@@ -1,4 +1,6 @@
-package com.starbucks.service;
+package com.starbucks.service.mock;
+
+import com.starbucks.service.PingService;
 
 public class PingServiceMockImpl implements PingService {
     @Override

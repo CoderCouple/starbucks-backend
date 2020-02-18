@@ -294,4 +294,29 @@
         </sql>
     </changeSet>
 
+    <changeSet id="48" author="Sunil">
+        <sql>
+            ALTER TABLE `Product` ADD COLUMN `type` enum('CAPPUCCINO','ESPRESSO','MOCHAS','MACCHIATOS','LATTES') NOT NULL DEFAULT 'LATTES' AFTER `id`;
+        </sql>
+    </changeSet>
+
+    <changeSet id="49" author="Sunil">
+        <sql>
+            ALTER TABLE `LineItem` CHANGE COLUMN `order_id` `orderId` int;
+        </sql>
+    </changeSet>
+
+    <changeSet id="50" author="Sunil">
+        <sql>
+            ALTER TABLE `LineItem` CHANGE COLUMN `product_id` `productId`  int;
+        </sql>
+    </changeSet>
+
+    <changeSet id="51" author="Sunil">
+        <sql>
+            ALTER TABLE `Order` ADD  FOREIGN KEY(userId) REFERENCES `User` (id) ON DELETE CASCADE ON UPDATE CASCADE;
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>

@@ -9,56 +9,96 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 
-@PersistenceCapable(detachable = "true", table = "Ping", objectIdClass = Ping.PK.class)
-public class Ping  implements PersistentObject {
-    @PrimaryKey
+@PersistenceCapable(detachable = "true", table = "Product", objectIdClass = LineItem.PK.class)
+public class LineItem  implements PersistentObject {
+
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
+    @PrimaryKey
     private int id;
 
     @Persistent
-    private String data;
+    @NotNull
+    private int orderId;
+
+    @Persistent
+    @NotNull
+    private int productId;
+
+    @Persistent
+    @NotNull
+    private int quantity;
+
+
+    @Override
+    public Object primaryKey() {
+        return null;
+    }
 
     public int getId() {
         return id;
     }
 
-    public Ping setId(final int id) {
+    public LineItem setId(final int id) {
         this.id = id;
         return this;
     }
 
-    public String getData() {
-        return data;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public Ping setData(final String data) {
-        this.data = data;
+    public LineItem setOrderId(final int orderId) {
+        this.orderId = orderId;
         return this;
     }
 
-    public static Ping sample() {
-        return new Ping()
-                .setId(1)
-                .setData("Pong!");
+    public int getProductId() {
+        return productId;
     }
+
+    public LineItem setProductId(final int productId) {
+        this.productId = productId;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public LineItem setQuantity(final int quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public static LineItem sample() {
+        return new LineItem()
+                .setId(1)
+                .setOrderId(1)
+                .setProductId(1)
+                .setQuantity(10);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
 
-        if (!(o instanceof Ping)) {
+        if (!(o instanceof LineItem)) {
             return false;
         }
 
-        Ping ping = (Ping) o;
+        LineItem lineItem = (LineItem) o;
 
         return new EqualsBuilder()
-                .append(getId(), ping.getId())
-                .append(getData(), ping.getData())
+                .append(getId(), lineItem.getId())
+                .append(getOrderId(), lineItem.getOrderId())
+                .append(getProductId(), lineItem.getProductId())
+                .append(getQuantity(), lineItem.getQuantity())
                 .isEquals();
     }
 
@@ -66,7 +106,9 @@ public class Ping  implements PersistentObject {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(getId())
-                .append(getData())
+                .append(getOrderId())
+                .append(getProductId())
+                .append(getQuantity())
                 .toHashCode();
     }
 
@@ -74,13 +116,10 @@ public class Ping  implements PersistentObject {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("data", data)
+                .append("orderId", orderId)
+                .append("productId", productId)
+                .append("quantity", quantity)
                 .toString();
-    }
-
-    @Override
-    public Object primaryKey() {
-        return getId();
     }
 
     public static class PK implements Serializable {
