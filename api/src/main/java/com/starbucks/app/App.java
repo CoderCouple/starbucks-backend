@@ -87,7 +87,7 @@ public class App extends ResourceConfig {
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("com.starbucks.api");
-        beanConfig.setDescription("Provides the list of starbucks backend Apis");
+        beanConfig.setDescription("Provides the list of APIs Starbucks backend");
         beanConfig.setTitle("Starbucks Backend API");
         beanConfig.setScan(true);
         return beanConfig;

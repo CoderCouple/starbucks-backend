@@ -19,26 +19,26 @@ import javax.ws.rs.core.Response;
 @Path("v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PingResourceApi {
+public class PingApiResource {
 
     private SharedConfig config;
     private PingService pingService;
 
     @Inject
-    public PingResourceApi(final SharedConfig config, final PingService pingService) {
+    public PingApiResource(final SharedConfig config, final PingService pingService) {
         this.config = config;
         this.pingService = pingService;
     }
 
     @GET
     @Path("/ping")
-    @ApiOperation(value = "Ping Api",
+    @ApiOperation(value = "Ping API",
     notes = "Simple Ping API for health check",
     response = String.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Internal Server Error")
+            @ApiResponse(code = 404, message = "PING NOT FOUND"),
+            @ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")
     })
     public Response ping() {
         String res = pingService.getPingResponse();

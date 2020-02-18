@@ -1,12 +1,12 @@
 package com.starbucks.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public UserNotFoundException() {
+    public NotFoundException() {
         super();
     }
 
@@ -18,7 +18,7 @@ public class UserNotFoundException extends RuntimeException {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public UserNotFoundException(final String message) {
+    public NotFoundException(final String message) {
         super(message);
     }
 
@@ -36,7 +36,7 @@ public class UserNotFoundException extends RuntimeException {
      *                unknown.)
      * @since 1.4
      */
-    public UserNotFoundException(final String message, final Throwable cause) {
+    public NotFoundException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
@@ -53,7 +53,7 @@ public class UserNotFoundException extends RuntimeException {
      *              unknown.)
      * @since 1.4
      */
-    public UserNotFoundException(final Throwable cause) {
+    public NotFoundException(final Throwable cause) {
         super(cause);
     }
 
@@ -71,7 +71,7 @@ public class UserNotFoundException extends RuntimeException {
      *                           be writable
      * @since 1.7
      */
-    protected UserNotFoundException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
+    protected NotFoundException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

@@ -17,31 +17,24 @@ WORKDIR ${build_dir}
 COPY ./ ./
 
 #compile the source code
-RUN mvn clean package
-
+RUN mvn clean install
 ############################# Stage 2 - Deployment ######################
 
-FROM jetty:9.4.18-jre8-alpine
+FROM tomcat:8.5.16-jre8-alpine
 
-#USER root
-#
-#RUN mkdir -p /home/jetty && chown -R jetty:jetty /home/jetty
-#
-#RUN chown -R jetty:jetty /var/lib/jetty/webapps
+EXPOSE 8080
 
-USER jetty
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-RUN rm -rf $JETTY_BASE/webapps/*
+COPY --from=build app/starbucks-backend/api/target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 
-COPY --chown=jetty:jetty --from=build app/starbucks-backend/api/target/ROOT.war $JETTY_BASE/webapps/ROOT.war
-
-#COPY --chown=jetty:jetty --from=build app/starbucks-backend/ping/target/ROOT $JETTY_BASE/webapps/ROOT
+CMD ["catalina.sh","run"]
 
 #Build the image
-# docker build -t sunil28/starbucks-backend .
+# docker build -t starbucks .
 
 #Run the image
-# docker run -it -p 8080:8080 sunil28/starbucks-backend
+# docker run -it -p 8080:8080 starbucks
 
 #Enter into the container
 # docker exec -it 3274b10d06ee /bin/bash

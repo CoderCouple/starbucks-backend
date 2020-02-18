@@ -53,99 +53,44 @@ public class UserProfileView {
         return id;
     }
 
-    public UserProfileView setId(final int id) {
-        this.id = id;
-        return this;
-    }
-
     public String getGuid() {
         return guid;
-    }
-
-    public UserProfileView setGuid(final String guid) {
-        this.guid = guid;
-        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public UserProfileView setFirstName(final String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public UserProfileView setLastName(final String lastName) {
-        this.lastName = lastName;
-        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public UserProfileView setEmail(final String email) {
-        this.email = email;
-        return this;
-    }
-
     public String getDateOfBirth() {
         return dateOfBirth;
-    }
-
-    public UserProfileView setDateOfBirth(final String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-        return this;
     }
 
     public int getAge() {
         return age;
     }
 
-    public UserProfileView setAge(final int age) {
-        this.age = age;
-        return this;
-    }
-
     public boolean getIsActive() {
         return isActive;
-    }
-
-    public UserProfileView setIsActive(final boolean active) {
-        isActive = active;
-        return this;
     }
 
     public Timestamp getCreated() {
         return created;
     }
 
-    public UserProfileView setCreated(final Timestamp created) {
-        this.created = created;
-        return this;
-    }
-
     public Timestamp getUpdated() {
         return updated;
     }
 
-    public UserProfileView setUpdated(final Timestamp updated) {
-        this.updated = updated;
-        return this;
-    }
-
     public List<Order> getOrders() {
         return orders;
-    }
-
-    public UserProfileView setOrders(final List<Order> orders) {
-        this.orders = orders;
-        return this;
     }
 
     @Override

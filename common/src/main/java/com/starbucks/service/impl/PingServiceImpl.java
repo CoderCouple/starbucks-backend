@@ -1,8 +1,9 @@
-package com.starbucks.service;
+package com.starbucks.service.impl;
 
 
 import com.starbucks.dao.PingDao;
-import com.starbucks.model.Ping;
+import com.starbucks.service.PingService;
+import com.starbucks.view.PingView;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,7 @@ public class PingServiceImpl implements PingService {
 
     @Override
     public String getPingResponse() {
-        Ping p = pingDao.getPing();
-        return p.getData();
+        PingView pingView = pingDao.getPing();
+        return pingView.getData();
     }
 }

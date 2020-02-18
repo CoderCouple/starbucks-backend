@@ -14,12 +14,11 @@ import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Unique;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.StringTokenizer;
 
-@PersistenceCapable(detachable = "true", table = "User", objectIdClass = User.PK.class)
-public class User implements PersistentObject {
+@PersistenceCapable(detachable = "true", table = "Product", objectIdClass = Product.PK.class)
+public class Product  implements PersistentObject {
 
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
     @PrimaryKey
@@ -28,28 +27,19 @@ public class User implements PersistentObject {
     @Persistent
     @NotNull
     @Unique
-    private String guid;
+    private Type type;
 
     @Persistent
     @NotNull
-    private String firstName;
+    private String name;
 
     @Persistent
     @NotNull
-    private String lastName;
+    private double cost;
 
     @Persistent
     @NotNull
-    @Unique
-    private String email;
-
-    @Persistent
-    @NotNull
-    private String password;
-
-    @Persistent
-    @NotNull
-    private Date dateOfBirth;
+    private int totalQuantity;
 
     @Persistent
     @NotNull
@@ -61,66 +51,72 @@ public class User implements PersistentObject {
     @ReadOnly
     private Timestamp updated;
 
+
+    public enum Type {
+        CAPPUCCINO("CAPPUCCINO"),
+        ESPRESSO("ESPRESSO"),
+        MOCHAS("MOCHAS"),
+        MACCHIATOS("MACCHIATOS"),
+        LATTES("LATTES");
+
+        private String name;
+
+        Type(final String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
     public int getId() {
         return id;
     }
 
-    public User setId(final int id) {
+    public Product setId(final int id) {
         this.id = id;
         return this;
     }
 
-    public String getGuid() {
-        return guid;
+    public Type getType() {
+        return type;
     }
 
-    public User setGuid(final String guid) {
-        this.guid = guid;
+    public Product setType(final Type type) {
+        this.type = type;
         return this;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public User setFirstName(final String firstName) {
-        this.firstName = firstName;
+    public Product setType(final String type) {
+        this.type = Type.valueOf(type);
         return this;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public User setLastName(final String lastName) {
-        this.lastName = lastName;
+    public Product setName(final String name) {
+        this.name = name;
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public double getCost() {
+        return cost;
     }
 
-    public User setEmail(final String email) {
-        this.email = email;
+    public Product setCost(final double cost) {
+        this.cost = cost;
         return this;
     }
 
-    public String getPassword() {
-        return password;
+    public int getTotalQuantity() {
+        return totalQuantity;
     }
 
-    public User setPassword(final String password) {
-        this.password = password;
-        return this;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public User setDateOfBirth(final Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public Product setTotalQuantity(final int totalQuantity) {
+        this.totalQuantity = totalQuantity;
         return this;
     }
 
@@ -128,8 +124,8 @@ public class User implements PersistentObject {
         return isActive;
     }
 
-    public User setIsActive(final boolean isActive) {
-        this.isActive = isActive;
+    public Product setIsActive(final boolean active) {
+        isActive = active;
         return this;
     }
 
@@ -137,7 +133,7 @@ public class User implements PersistentObject {
         return created;
     }
 
-    public User setCreated(final Timestamp created) {
+    public Product setCreated(final Timestamp created) {
         this.created = created;
         return this;
     }
@@ -146,20 +142,18 @@ public class User implements PersistentObject {
         return updated;
     }
 
-    public User setUpdated(final Timestamp updated) {
+    public Product setUpdated(final Timestamp updated) {
         this.updated = updated;
         return this;
     }
 
-    public static User sample() {
-        return new User()
+    public static Product sample() {
+        return new Product()
                 .setId(1)
-                .setGuid("GUID1")
-                .setFirstName("fname")
-                .setLastName("lname")
-                .setEmail("email")
-                .setPassword("pwd")
-                .setDateOfBirth(new Date(1580875529))
+                .setType(Type.LATTES)
+                .setName("Mocha Latte")
+                .setCost(4.5)
+                .setTotalQuantity(10)
                 .setIsActive(true)
                 .setCreated(Utils.getUTCTimestamp("2020-01-01 01:01:01"))
                 .setUpdated(Utils.getUTCTimestamp("2020-01-01 01:01:01"));
@@ -171,23 +165,21 @@ public class User implements PersistentObject {
             return true;
         }
 
-        if (!(o instanceof User)) {
+        if (!(o instanceof Product)) {
             return false;
         }
 
-        User user = (User) o;
+        Product product = (Product) o;
 
         return new EqualsBuilder()
-                .append(getId(), user.getId())
-                .append(isActive, user.isActive)
-                .append(getGuid(), user.getGuid())
-                .append(getFirstName(), user.getFirstName())
-                .append(getLastName(), user.getLastName())
-                .append(getEmail(), user.getEmail())
-                .append(getPassword(), user.getPassword())
-                .append(getDateOfBirth(), user.getDateOfBirth())
-                .append(getCreated(), user.getCreated())
-                .append(getUpdated(), user.getUpdated())
+                .append(getId(), product.getId())
+                .append(getCost(), product.getCost())
+                .append(getTotalQuantity(), product.getTotalQuantity())
+                .append(getIsActive(), product.getIsActive())
+                .append(getType(), product.getType())
+                .append(getName(), product.getName())
+                .append(getCreated(), product.getCreated())
+                .append(getUpdated(), product.getUpdated())
                 .isEquals();
     }
 
@@ -195,13 +187,11 @@ public class User implements PersistentObject {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(getId())
-                .append(getGuid())
-                .append(getFirstName())
-                .append(getLastName())
-                .append(getEmail())
-                .append(getPassword())
-                .append(getDateOfBirth())
-                .append(isActive)
+                .append(getType())
+                .append(getName())
+                .append(getCost())
+                .append(getTotalQuantity())
+                .append(getIsActive())
                 .append(getCreated())
                 .append(getUpdated())
                 .toHashCode();
@@ -211,12 +201,10 @@ public class User implements PersistentObject {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("guid", guid)
-                .append("firstName", firstName)
-                .append("lastName", lastName)
-                .append("email", email)
-                .append("password", password)
-                .append("dateOfBirth", dateOfBirth)
+                .append("type", type)
+                .append("name", name)
+                .append("cost", cost)
+                .append("totalQuantity", totalQuantity)
                 .append("isActive", isActive)
                 .append("created", created)
                 .append("updated", updated)
@@ -276,4 +264,5 @@ public class User implements PersistentObject {
                     .toString();
         }
     }
+
 }

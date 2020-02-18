@@ -31,6 +31,7 @@ public class DBConnImpl implements DBConn {
         properties.setProperty("javax.jdo.option.ConnectionURL", config.getString("datanucleus.ConnectionURL"));
         properties.setProperty("javax.jdo.option.ConnectionUserName", config.getString("datanucleus.ConnectionUserName"));
         properties.setProperty("javax.jdo.option.ConnectionPassword", config.getString("datanucleus.ConnectionPassword"));
+        properties.setProperty("datanucleus.query.sql.allowAll", config.getString("datanucleus.query.sql.allowAll"));
         return properties;
     }
 }
