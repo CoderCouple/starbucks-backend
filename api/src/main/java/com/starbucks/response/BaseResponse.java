@@ -15,30 +15,27 @@ import java.util.Map;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class BaseResponse {
 
-    @JsonProperty
+    @JsonProperty("data")
     private Object data;
 
-    @JsonProperty
+    @JsonProperty("meta")
     private Object meta;
 
-    @JsonProperty
+    @JsonProperty("debug")
     private Object debug;
 
-    @JsonProperty
+    @JsonProperty("errors")
     private List<Map<String, Object>> errors;
 
-    @JsonProperty
+    @JsonProperty("status")
     private HttpStatus status;
 
-    @JsonProperty
+    @JsonProperty("timestamp")
     private Long timestamp;
 
     public BaseResponse() {
     }
 
-    public static void main(String[] args) {
-
-    }
     public Object getData() {
         return data;
     }

@@ -33,7 +33,7 @@ public class Localization {
             LOGGER.info("key", key, "lang", lang, "result", result, " Localized message for given key and lang");
             return result;
         } catch (final Exception ex) {
-            LOGGER.error("key:" + key +" lang:" + lang + " StarbucksError finding localized string for given key and lang",ex);
+            LOGGER.error("key:" + key + " lang:" + lang + " StarbucksError finding localized string for given key and lang", ex);
             return null;
         }
     }
