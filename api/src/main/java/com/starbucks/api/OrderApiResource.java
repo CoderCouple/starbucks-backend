@@ -81,7 +81,7 @@ public class OrderApiResource {
             @ApiResponse(code = 500, message = "INTERNAL SERVER ERROR")
     })
     public Response updateOrder(@PathParam("orderId") final int orderId, @Valid final OrderPayload payload) {
-        Map<String, Object> orderPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
+        Map<String, Object> orderPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, Object>>() { });
         boolean isUpdated =  orderService.updateOrder(orderId, orderPayloadMap);
         JsonObject object = new JsonObject();
         if (isUpdated) {

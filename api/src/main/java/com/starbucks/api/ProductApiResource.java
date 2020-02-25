@@ -9,6 +9,7 @@ import com.starbucks.service.ProductService;
 import com.starbucks.view.ProductView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -74,7 +75,7 @@ public class ProductApiResource {
     }
 
     @PUT
-    @Path("/product/{productId}")
+    @Path("/product/{type}")
     @ApiOperation(value = "Update Product By Id API",
             notes = "This API allows an admin to update a particular product by its Id",
             response = Boolean.class)
@@ -83,15 +84,15 @@ public class ProductApiResource {
             @ApiResponse(code = 401, message = "UNAUTHORIZED ACCESS"),
             @ApiResponse(code = 404, message = "PRODUCT NOT FOUND")
     })
-    public Response updateProduct(@PathParam("productId") final int productId, @Valid final ProductPayload payload) {
+    public Response updateProduct(@ApiParam(value = "type", required = true, allowableValues = "CAPPUCCINO, ESPRESSO, MOCHAS, MACCHIATOS, LATTES") @PathParam("type") final String type, @Valid final ProductPayload payload) {
         Map<String, String> productPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
-        boolean isUpdated =  productService.updateProduct(productId, productPayloadMap);
+        boolean isUpdated =  productService.updateProduct(type, productPayloadMap);
         JsonObject object = new JsonObject();
         if (isUpdated) {
-            object.addProperty("data", "Product updated for productId : " + productId);
+            object.addProperty("data", "Product updated for type : " + type);
             return Response.ok().entity(object.toString()).build();
         } else {
-            object.addProperty("error", "Product can not be updated for productId : " + productId);
+            object.addProperty("error", "Product can not be updated for type : " + type);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(object.toString()).build();
         }
     }

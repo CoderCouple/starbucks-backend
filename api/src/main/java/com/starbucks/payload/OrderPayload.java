@@ -3,7 +3,7 @@ package com.starbucks.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.starbucks.util.Utils;
+import com.starbucks.util.ApiUtils;
 import com.starbucks.exception.InvalidFieldValueException;
 import com.starbucks.exception.MissingRequiredFieldException;
 import com.starbucks.model.Order;
@@ -58,7 +58,7 @@ public class OrderPayload {
                         @JsonProperty(value = "purchaseDate", required = true) final String purchaseDate,
                         @JsonProperty(value = "lineItems", required = true) final List<Map<String, String>> lineItems) {
 
-        if (!Utils.isValidOrderStatus(status)) {
+        if (!ApiUtils.isValidOrderStatus(status)) {
             throw  new InvalidFieldValueException("Invalid order status. Please try again!!!");
         }
 
@@ -80,7 +80,7 @@ public class OrderPayload {
 
         @JsonProperty("productId")
         @ApiModelProperty(value = "productId", example = "1", required = true)
-        private String productId;
+        private int productId;
 
         @JsonProperty("name")
         @ApiModelProperty(value = "name", example = "Smoked Butterscotch Latte", required = true)
@@ -122,11 +122,11 @@ public class OrderPayload {
                 throw new MissingRequiredFieldException("Missing Required Field : " + QUANTITY);
             }
 
-            if (!Utils.isValidProductType(type)) {
+            if (!ApiUtils.isValidProductType(data.get(TYPE))) {
                 throw  new InvalidFieldValueException("Invalid product type. Please try again!!!");
             }
 
-            this.productId = data.get(PRODUCT_ID);
+            this.productId = Integer.valueOf(data.get(PRODUCT_ID));
             this.name = data.get(NAME);
             this.type = data.get(TYPE);
             this.cost = Double.valueOf(data.get(COST));

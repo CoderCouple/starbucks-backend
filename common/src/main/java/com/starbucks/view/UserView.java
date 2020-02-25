@@ -1,12 +1,12 @@
 package com.starbucks.view;
 
 import com.starbucks.model.User;
+import com.starbucks.util.CommonUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -20,8 +20,8 @@ public class UserView {
     private String dateOfBirth;
     private int age;
     private boolean isActive;
-    private Timestamp created;
-    private Timestamp updated;
+    private String created;
+    private String updated;
 
     public UserView(final User user) {
         this.id = user.getId();
@@ -32,8 +32,8 @@ public class UserView {
         this.dateOfBirth = user.getDateOfBirth().toString();
         this.age = getUserAgeFromDOB(user.getDateOfBirth());
         this.isActive = user.getIsActive();
-        this.created = user.getCreated();
-        this.updated = user.getUpdated();
+        this.created = CommonUtils.getUTCDateTimeString(user.getCreated());
+        this.updated = CommonUtils.getUTCDateTimeString(user.getUpdated());
     }
 
     private int getUserAgeFromDOB(final Date dateOfBirth) {
@@ -76,11 +76,11 @@ public class UserView {
         return isActive;
     }
 
-    public Timestamp getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public Timestamp getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 

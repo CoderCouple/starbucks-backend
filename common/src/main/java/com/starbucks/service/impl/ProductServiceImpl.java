@@ -1,11 +1,14 @@
 package com.starbucks.service.impl;
 
-import com.starbucks.dao.ProductDao;
 import com.starbucks.exception.NotFoundException;
 import com.starbucks.exception.StarbucksApiException;
 import com.starbucks.model.Product;
+import com.starbucks.persistance.DaoProvider;
+import com.starbucks.persistance.PersistenceManagerProvider;
 import com.starbucks.service.ProductService;
 import com.starbucks.view.ProductView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -13,25 +16,27 @@ import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
 
-    private ProductDao productDao;
+    private DaoProvider daoProvider;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Inject
-    public ProductServiceImpl(final ProductDao productDao) {
-        this.productDao = productDao;
+    public ProductServiceImpl(final DaoProvider daoProvider) {
+        this.daoProvider = daoProvider;
     }
 
     @Override
     public ProductView getProductById(final int productId) {
-        Optional<Product> product = productDao.fetchProductById(productId);
-        if (!product.isPresent()) {
-            throw new NotFoundException("Product not found in DB");
+        try (final PersistenceManagerProvider pmp = daoProvider.getReadPmp()) {
+            Optional<Product> product = daoProvider.getDaoFactory().getProductDao(pmp).fetchProductById(productId);
+            if (!product.isPresent()) {
+                throw new NotFoundException("Product not found in DB");
+            }
+            return new ProductView(product.get());
         }
-        return new ProductView(product.get());
     }
 
     @Override
     public ProductView createProduct(final Map<String, String> payload) {
-        ProductView productView = null;
         Product product = new Product()
                 .setType(payload.get("type"))
                 .setName(payload.get("name"))
@@ -39,31 +44,33 @@ public class ProductServiceImpl implements ProductService {
                 .setTotalQuantity(Integer.valueOf(payload.get("totalQuantity")))
                 .setIsActive(true);
 
-        try {
-            productView = productDao.createProduct(product);
+        try (final PersistenceManagerProvider pmp = daoProvider.getWritePmp()) {
+            return daoProvider.getDaoFactory().getProductDao(pmp).createProduct(product);
         } catch (final Exception ex) {
             throw new StarbucksApiException("Unable to create product in DB");
         }
-
-        return productView;
     }
 
     @Override
-    public boolean updateProduct(final int productId, final Map<String, String> payload) {
-        int totaQuantity = Integer.valueOf(payload.get("totalQuantity"));
-        boolean isSuccessful = productDao.updateProduct(productId, totaQuantity);
-        if (!isSuccessful) {
-            throw new StarbucksApiException("Failed to update product in DB");
+    public boolean updateProduct(final String type, final Map<String, String> payload) {
+        try (final PersistenceManagerProvider pmp = daoProvider.getWritePmp()) {
+            int totaQuantity = Integer.valueOf(payload.get("totalQuantity"));
+            boolean isSuccessful = daoProvider.getDaoFactory().getProductDao(pmp).updateProduct(type, totaQuantity);
+            if (!isSuccessful) {
+                throw new StarbucksApiException("Failed to update product in DB");
+            }
+            return isSuccessful;
         }
-        return isSuccessful;
     }
 
     @Override
     public boolean deleteProduct(final int productId) {
-        boolean isSuccessful = productDao.deleteProductById(productId);
-        if (!isSuccessful) {
-            throw new StarbucksApiException("Failed to delete product in DB");
+        try (final PersistenceManagerProvider pmp = daoProvider.getWritePmp()) {
+            boolean isSuccessful = daoProvider.getDaoFactory().getProductDao(pmp).deleteProductById(productId);
+            if (!isSuccessful) {
+                throw new StarbucksApiException("Failed to delete product in DB");
+            }
+            return isSuccessful;
         }
-        return isSuccessful;
     }
 }

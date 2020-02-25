@@ -10,7 +10,7 @@ public interface ProductService {
 
     ProductView createProduct(final Map<String, String> payload);
 
-    boolean updateProduct(final int productId, final Map<String, String> payload);
+    boolean updateProduct(final String type, final Map<String, String> payload);
 
     boolean deleteProduct(final int orderId);
 

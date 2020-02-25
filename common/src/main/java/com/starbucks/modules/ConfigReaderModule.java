@@ -6,8 +6,6 @@ import com.google.inject.Singleton;
 import com.starbucks.config.ConfigReader;
 import com.starbucks.config.SharedConfig;
 import com.starbucks.config.SharedConfigImpl;
-import com.starbucks.persistance.DBConn;
-import com.starbucks.persistance.DBConnImpl;
 
 public class ConfigReaderModule extends AbstractModule {
     @Override
@@ -18,12 +16,6 @@ public class ConfigReaderModule extends AbstractModule {
     @Provides
     @Singleton
     public SharedConfig getSharedConfig(final ConfigReader configReader) {
-        return new SharedConfigImpl(configReader);
-    }
-
-    @Provides
-    @Singleton
-    public DBConn getDBConnection(final SharedConfig config) {
-        return new DBConnImpl(config);
+        return new SharedConfigImpl(configReader, SharedConfig.Group.MAIN);
     }
 }

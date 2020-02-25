@@ -2,17 +2,20 @@ package com.starbucks.view;
 
 import com.starbucks.model.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderListView {
 
-    private List<Order> orders;
+    private List<OrderView> orders = new ArrayList<>();
 
     public OrderListView(final List<Order> orders) {
-        this.orders = orders;
+        for (final  Order order : orders) {
+         this.orders.add(new OrderView(order));
+        }
     }
 
-    public List<Order> getOrders() {
+    public List<OrderView> getOrders() {
         return orders;
     }
 }

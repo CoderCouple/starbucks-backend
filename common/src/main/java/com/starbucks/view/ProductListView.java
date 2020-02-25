@@ -6,13 +6,15 @@ import java.util.List;
 
 public class ProductListView {
 
-    private List<Product> products;
+    private List<ProductView> products;
 
     public ProductListView(final List<Product> products) {
-        this.products = products;
+        for (final Product product : products) {
+            this.products.add(new ProductView(product));
+        }
     }
 
-    public List<Product> getProducts() {
+    public List<ProductView> getProducts() {
         return products;
     }
 }

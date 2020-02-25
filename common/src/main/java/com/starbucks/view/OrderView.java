@@ -1,31 +1,28 @@
 package com.starbucks.view;
 
 import com.starbucks.model.Order;
-
-import java.sql.Timestamp;
+import com.starbucks.util.CommonUtils;
 
 public class OrderView {
 
     private int id;
     private String transactionId;
     private int userId;
-    private int inventoryId;
     private Order.Status status;
     private double total;
-    private Timestamp purchaseDate;
-    private Timestamp created;
-    private Timestamp updated;
+    private String purchaseDate;
+    private String created;
+    private String updated;
 
     public OrderView(final Order order) {
         this.id = order.getId();
         this.transactionId = order.getTransactionId();
         this.userId = order.getUserId();
-        this.inventoryId = order.getInventoryId();
         this.status = order.getStatus();
         this.total = order.getTotal();
-        this.purchaseDate = order.getPurchaseDate();
-        this.created = order.getCreated();
-        this.updated = order.getUpdated();
+        this.purchaseDate = CommonUtils.getUTCDateTimeString(order.getPurchaseDate());
+        this.created = CommonUtils.getUTCDateTimeString(order.getCreated());
+        this.updated = CommonUtils.getUTCDateTimeString(order.getUpdated());
     }
 
     public int getId() {
@@ -40,10 +37,6 @@ public class OrderView {
         return userId;
     }
 
-    public int getInventoryId() {
-        return inventoryId;
-    }
-
     public Order.Status getStatus() {
         return status;
     }
@@ -52,15 +45,15 @@ public class OrderView {
         return total;
     }
 
-    public Timestamp getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
 
-    public Timestamp getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public Timestamp getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 }
