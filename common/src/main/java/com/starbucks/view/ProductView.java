@@ -1,11 +1,10 @@
 package com.starbucks.view;
 
 import com.starbucks.model.Product;
+import com.starbucks.util.CommonUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import java.sql.Timestamp;
 
 public class ProductView {
 
@@ -15,8 +14,8 @@ public class ProductView {
     private double cost;
     private int totalQuantity;
     private boolean isActive;
-    private Timestamp created;
-    private Timestamp updated;
+    private String created;
+    private String updated;
 
     public ProductView(final Product product) {
         this.id = product.getId();
@@ -25,8 +24,8 @@ public class ProductView {
         this.cost = product.getCost();
         this.totalQuantity = product.getTotalQuantity();
         this.isActive = product.getIsActive();
-        this.created = product.getCreated();
-        this.updated = product.getUpdated();
+        this.created = CommonUtils.getUTCDateTimeString(product.getCreated());
+        this.updated = CommonUtils.getUTCDateTimeString(product.getUpdated());
     }
 
     public int getId() {
@@ -53,11 +52,11 @@ public class ProductView {
         return isActive;
     }
 
-    public Timestamp getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public Timestamp getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 

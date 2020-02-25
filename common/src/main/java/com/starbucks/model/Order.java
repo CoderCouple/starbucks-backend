@@ -1,7 +1,7 @@
 package com.starbucks.model;
 
-import com.starbucks.dao.PersistentObject;
-import com.starbucks.util.Utils;
+import com.starbucks.persistance.PersistentObject;
+import com.starbucks.util.CommonUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.StringTokenizer;
 
-@PersistenceCapable(detachable = "true",  table = "User", objectIdClass = Order.PK.class)
+@PersistenceCapable(detachable = "true",  table = "Order", objectIdClass = Order.PK.class)
 public class Order implements PersistentObject {
 
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
@@ -33,10 +33,6 @@ public class Order implements PersistentObject {
     @Persistent
     @NotNull
     private int userId;
-
-    @Persistent
-    @NotNull
-    private int inventoryId;
 
     @Persistent
     @NotNull
@@ -79,15 +75,6 @@ public class Order implements PersistentObject {
 
     public Order setUserId(final int userId) {
         this.userId = userId;
-        return this;
-    }
-
-    public int getInventoryId() {
-        return inventoryId;
-    }
-
-    public Order setInventoryId(final int inventoryId) {
-        this.inventoryId = inventoryId;
         return this;
     }
 
@@ -164,12 +151,11 @@ public class Order implements PersistentObject {
                 .setId(1)
                 .setTransactionId("TRNX123456")
                 .setUserId(1)
-                .setInventoryId(1)
                 .setStatus(Status.PLACED)
                 .setTotal(100)
-                .setPurchaseDate(Utils.getUTCTimestamp("2020-01-01 01:01:01"))
-                .setCreated(Utils.getUTCTimestamp("2020-01-01 01:01:01"))
-                .setUpdated(Utils.getUTCTimestamp("2020-01-01 01:01:01"));
+                .setPurchaseDate(CommonUtils.getUTCTimestamp("2020-01-01 01:01:01"))
+                .setCreated(CommonUtils.getUTCTimestamp("2020-01-01 01:01:01"))
+                .setUpdated(CommonUtils.getUTCTimestamp("2020-01-01 01:01:01"));
     }
 
     @Override
@@ -187,7 +173,6 @@ public class Order implements PersistentObject {
         return new EqualsBuilder()
                 .append(getId(), order.getId())
                 .append(getUserId(), order.getUserId())
-                .append(getInventoryId(), order.getInventoryId())
                 .append(getTotal(), order.getTotal())
                 .append(getTransactionId(), order.getTransactionId())
                 .append(getStatus(), order.getStatus())
@@ -203,7 +188,6 @@ public class Order implements PersistentObject {
                 .append(getId())
                 .append(getTransactionId())
                 .append(getUserId())
-                .append(getInventoryId())
                 .append(getStatus())
                 .append(getTotal())
                 .append(getPurchaseDate())
@@ -218,7 +202,6 @@ public class Order implements PersistentObject {
                 .append("id", id)
                 .append("transactionId", transactionId)
                 .append("userId", userId)
-                .append("inventoryId", inventoryId)
                 .append("status", status)
                 .append("total", total)
                 .append("purchaseDate", purchaseDate)

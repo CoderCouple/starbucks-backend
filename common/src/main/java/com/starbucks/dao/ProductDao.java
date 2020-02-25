@@ -1,26 +1,24 @@
 package com.starbucks.dao;
 
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import com.starbucks.model.Product;
-import com.starbucks.persistance.DBConn;
+import com.starbucks.persistance.PersistenceManagerProvider;
+import com.starbucks.persistance.PersistentDao;
 import com.starbucks.view.ProductView;
 
-import javax.inject.Inject;
-import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.jdo.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import static javax.jdo.Query.SQL;
 
-public class ProductDao  extends BaseDao {
+public class ProductDao extends PersistentDao<Product> {
 
-    private DBConn conn;
-
-    @Inject
-    public ProductDao(final DBConn conn) {
-        this.conn = conn;
+    @AssistedInject
+    public ProductDao(final @Assisted PersistenceManagerProvider pmp) {
+        super(pmp, Product.class);
     }
 
     public static final String PRODUCT_BASE_QUERY = "SELECT p.id as id, " +
@@ -37,87 +35,57 @@ public class ProductDao  extends BaseDao {
 
     public static final String DELETE_PRODUCT_BY_ID = "UPDATE `Product` p SET p.isActive = 0 WHERE id = :productId";
 
-    public static final String UPDATE_PRODUCT_BY_ID = "UPDATE `Product` p SET p.totalQuantity = :totalQuantity WHERE p.id = :productId AND isActive = 1";
+    public static final String UPDATE_PRODUCT_BY_ID = "UPDATE `Product` AS `dest`, " +
+                                                      "(   SELECT totalQuantity " +
+                                                      "        FROM `Product` " +
+                                                      "        WHERE `type` = :type " +
+                                                      "    ) AS `src` " +
+                                                      "SET `dest`.`totalQuantity` = `src`.`totalQuantity` - :quantity " +
+                                                      "WHERE `dest`.`type` = :type " +
+                                                      "AND isActive = 1";
 
 
     public Optional<Product> fetchProductById(final int productId) {
 
-        PersistenceManager pm = conn.getPmp();
-
         Map<String, String> parameters = new HashMap<>();
         parameters.put("productId", String.valueOf(productId));
 
-        Product productRecord = null;
-
-        Query query = pm.newQuery(SQL, GET_PRODUCT_BY_ID);
+        Query query = getPmp().get().newQuery(SQL, GET_PRODUCT_BY_ID);
         query.setResultClass(Product.class);
         query.setUnique(true);
-        productRecord  = (Product) query.executeWithMap(parameters);
+        Product productRecord = (Product) query.executeWithMap(parameters);
 
         return Optional.ofNullable(productRecord);
     }
 
     public ProductView createProduct(final Product product) {
-        PersistenceManager pm = conn.getPmp();
-        Transaction tx = pm.currentTransaction();
-        Product productRecord = null;
-        try {
-            tx.begin();
-            productRecord = (Product) persistAndFetch(pm, product);
-            tx.commit();
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
 
-        }
+        Product productRecord = persistAndFetch(product);
         return new ProductView(productRecord);
     }
 
-    public boolean updateProduct(final int productId, final int totalQuantity) {
-        PersistenceManager pm = conn.getPmp();
+    public boolean updateProduct(final String type, final int totalQuantity) {
 
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("productId", String.valueOf(productId));
-        parameters.put("totalQuantity", String.valueOf(totalQuantity));
-        Transaction tx = pm.currentTransaction();
-        Long recordCount = 0L;
-        try {
-            tx.begin();
-            Query query = pm.newQuery(SQL, UPDATE_PRODUCT_BY_ID);
-            query.setResultClass(Long.class);
-            recordCount = (Long) query.executeWithMap(parameters);
-            tx.commit();
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
+        parameters.put("type", String.valueOf(type));
+        parameters.put("quantity", String.valueOf(totalQuantity));
 
-        }
+        Query query = getPmp().get().newQuery(SQL, UPDATE_PRODUCT_BY_ID);
+        query.setResultClass(Long.class);
+        Long recordCount = (Long) query.executeWithMap(parameters);
         return recordCount == 1;
     }
 
 
     public boolean deleteProductById(final int productId) {
 
-        PersistenceManager pm = conn.getPmp();
-
         Map<String, String> parameters = new HashMap<>();
         parameters.put("productId", String.valueOf(productId));
-        Transaction tx = pm.currentTransaction();
-        Long recordCount = 0L;
-        try {
-            tx.begin();
-            Query query = pm.newQuery(SQL, DELETE_PRODUCT_BY_ID);
-            query.setResultClass(Long.class);
-            recordCount = (Long) query.executeWithMap(parameters);
-            tx.commit();
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
 
-        }
+        Query query = getPmp().get().newQuery(SQL, DELETE_PRODUCT_BY_ID);
+        query.setResultClass(Long.class);
+        Long recordCount = (Long) query.executeWithMap(parameters);
+
         return recordCount == 1;
     }
 

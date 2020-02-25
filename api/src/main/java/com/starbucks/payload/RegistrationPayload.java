@@ -3,7 +3,7 @@ package com.starbucks.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.starbucks.util.Utils;
+import com.starbucks.util.ApiUtils;
 import com.starbucks.exception.InvalidFieldValueException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,11 +45,11 @@ public class RegistrationPayload {
         this.password = password;
         this.dob = dob;
 
-        if (!Utils.isValidEmailAddress(email)) {
+        if (!ApiUtils.isValidEmailAddress(email)) {
             throw  new InvalidFieldValueException("Invalid email address format. Please try again!!!");
         }
 
-        if (!Utils.isValidDate(dob)) {
+        if (!ApiUtils.isValidDate(dob)) {
             throw  new InvalidFieldValueException("Invalid date format. Please try again!!!");
         }
     }

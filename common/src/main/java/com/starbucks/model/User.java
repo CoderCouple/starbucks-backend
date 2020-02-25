@@ -1,7 +1,7 @@
 package com.starbucks.model;
 
-import com.starbucks.dao.PersistentObject;
-import com.starbucks.util.Utils;
+import com.starbucks.persistance.PersistentObject;
+import com.starbucks.util.CommonUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -161,8 +161,8 @@ public class User implements PersistentObject {
                 .setPassword("pwd")
                 .setDateOfBirth(new Date(1580875529))
                 .setIsActive(true)
-                .setCreated(Utils.getUTCTimestamp("2020-01-01 01:01:01"))
-                .setUpdated(Utils.getUTCTimestamp("2020-01-01 01:01:01"));
+                .setCreated(CommonUtils.getUTCTimestamp("2020-01-01 01:01:01"))
+                .setUpdated(CommonUtils.getUTCTimestamp("2020-01-01 01:01:01"));
     }
 
     @Override

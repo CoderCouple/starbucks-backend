@@ -14,7 +14,7 @@ import static com.starbucks.constant.Constants.PASSWORD_VALIDATION_REGEX;
 import static com.starbucks.constant.Constants.SIMPLE_DATE_FORMAT;
 import static com.starbucks.constant.Constants.SIMPLE_DATE_VALIDATION_REGEX;
 
-public class Utils<E> {
+public class ApiUtils {
     public static boolean isValidEmailAddress(final String email) {
         String regex = EMAIL_VALIDATION_REGEX;
         return email.matches(regex);

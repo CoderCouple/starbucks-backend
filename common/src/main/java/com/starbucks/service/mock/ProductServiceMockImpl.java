@@ -18,7 +18,7 @@ public class ProductServiceMockImpl implements ProductService {
     }
 
     @Override
-    public boolean updateProduct(final int productId, final Map<String, String> payload) {
+    public boolean updateProduct(final String type, final Map<String, String> payload) {
         return true;
     }
 

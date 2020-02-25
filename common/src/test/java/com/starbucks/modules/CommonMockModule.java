@@ -6,5 +6,6 @@ public class CommonMockModule extends AbstractModule {
     @Override
     protected void configure() {
         install(new TestServiceModule());
+        install(new TestPersistenceModule());
     }
 }

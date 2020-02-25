@@ -6,13 +6,15 @@ import java.util.List;
 
 public class UserListView {
 
-    private List<User> users;
+    private List<UserView> users;
 
     public UserListView(final List<User> users) {
-        this.users = users;
+        for (final User user : users) {
+            this.users.add(new UserView(user));
+        }
     }
 
-    public List<User> getUsers() {
+    public List<UserView> getUsers() {
         return users;
     }
 }

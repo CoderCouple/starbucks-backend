@@ -1,46 +1,31 @@
 package com.starbucks.dao;
 
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import com.starbucks.model.Ping;
-import com.starbucks.persistance.DBConn;
+import com.starbucks.persistance.PersistenceManagerProvider;
+import com.starbucks.persistance.PersistentDao;
 import com.starbucks.view.PingView;
 
-import javax.inject.Inject;
-import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.jdo.Transaction;
 
 import static javax.jdo.Query.SQL;
 
-public class PingDao {
+public class PingDao extends PersistentDao<Ping> {
 
-    private DBConn conn;
-
-    @Inject
-    public PingDao(final DBConn conn) {
-        this.conn = conn;
+    @AssistedInject
+    public PingDao(final @Assisted PersistenceManagerProvider pmp) {
+        super(pmp, Ping.class);
     }
 
-    public static final String PING_BASE_QUERY = "SELECT id, data FROM Ping;";
+    public static final String PING_BASE_QUERY = "SELECT id, data FROM Ping";
 
     public PingView getPing() {
-        PersistenceManager pm = conn.getPmp();
-        Transaction tx = pm.currentTransaction();
-        Ping ping = null;
-        try {
-            tx.begin();
 
-            Query q = pm.newQuery(SQL, PING_BASE_QUERY);
-            q.setResultClass(Ping.class);
-            q.setUnique(true);
-            ping = (Ping) q.execute();
-            tx.commit();
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-
-            //pm.close();
-        }
+        Query q = getPmp().get().newQuery(SQL, PING_BASE_QUERY);
+        q.setResultClass(Ping.class);
+        q.setUnique(true);
+        Ping ping = (Ping) q.execute();
 
         return new PingView(ping);
     }

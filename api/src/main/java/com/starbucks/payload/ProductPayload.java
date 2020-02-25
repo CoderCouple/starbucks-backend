@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.starbucks.exception.InvalidFieldValueException;
 import com.starbucks.model.Product;
-import com.starbucks.util.Utils;
+import com.starbucks.util.ApiUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -37,7 +37,7 @@ public class ProductPayload {
                           @JsonProperty(value = "totalQuantity", required = true) final int totalQuantity) {
 
 
-        if (!Utils.isValidProductType(type)) {
+        if (!ApiUtils.isValidProductType(type)) {
             throw  new InvalidFieldValueException("Invalid product type. Please try again!!!");
         }
 
