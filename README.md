@@ -32,7 +32,7 @@
     
 
 ## Docker Setup: :cloud:
-* Run following commands to do a docker setup`
+* Run following commands to do a docker setup
     * `docker-compose up -d`
     * Database  Setup (Use Separate terminal) :fire:
         * `docker cp ./initDB.sql mysql-server:/`
