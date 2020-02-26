@@ -1,4 +1,4 @@
-# Starbucks-Backend :copyright: [![Build Status] https://travis-ci.org/CoderCouple/starbucks-backend.svg?branch=master
+# Starbucks-Backend :copyright: [![Build Status](https://travis-ci.org/CoderCouple/starbucks-backend.svg?branch=master)](https://travis-ci.org/CoderCouple/starbucks-backend)
 >This repository provides a sample backend code for creating a :coffee: ordering REST application like Starbucks. 
 
 ------------------------------------------------------------------------------------------------------------------
