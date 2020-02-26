@@ -23,6 +23,6 @@
 
 
 ### Database Schema: 
-![shema_image] (https://raw.githubusercontent.com/CoderCouple/starbucks-backend/blob/master/common/src/main/resources/images/DBSchemas.png)
+![shema_image] (https://imgur.com/i5nS2oO)
 
 ### How to generate Swagger documentation:
