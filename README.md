@@ -2,6 +2,9 @@
 >This repository provides a sample backend code for creating a coffee ordering REST application like Starbucks. 
 
 ------------------------------------------------------------------------------------------------------------------
+
+## Local Setup:
+
 ### Pre-requisites:
 * Java-8
 * mysql 5.7 & above
@@ -27,7 +30,10 @@
     * `"username": "Your Username Here"`
     * `"access": "Your Password Here"`
     
-    
+
+## Docker Setup:
+>Coming Soon !!!
+
 ### List of available API:
 
 ![SwaggerApiList.png](common/src/main/resources/images/SwaggerApiList.png)
