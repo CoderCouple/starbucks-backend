@@ -32,10 +32,23 @@
     
 
 ## Docker Setup: :cloud:
->Coming Soon !!! :clock1:
+* Run following commands to do a docker setup`
+    * `docker-compose up -d`
+    * Database  Setup (Use Separate terminal)
+        * `docker cp ./initDB.sql mysql-server:/`
+        * `docker exec -it mysql-server /bin/bash`
+        * `mysql < initDB.sql`
+    * API  Setup (Use Separate terminal)
+        * `docker exec -it starbucks-backend /bin/bash`
+        * `mvn clean insall`
+        * `cd api && mvn jetty:run`
+        
+* Run following commands to do a docker tear down
+    * `docker compose down`
 
-
-
+* For a fresh start
+    * `docker compose stop`
+    * `docker system prune`
 
 ### List of available API:
 

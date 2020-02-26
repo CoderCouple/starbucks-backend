@@ -24,6 +24,9 @@ RUN mvn clean install
 
 WORKDIR api
 
+# start up command
+CMD ["mvn","jetty:run"]
+
 #Build the image
 # docker build -t sunil28/starbucks-backend .
 
