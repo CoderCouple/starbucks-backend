@@ -102,7 +102,7 @@
           "credstore_port": 5768,
           "dbname": "starbucks",
           "driver_name": "com.mysql.cj.jdbc.Driver",
-          "host": "localhost",
+          "host": "mysql-server",
           "idle_timeout": 60000,
           "leak_detection_threshold": 30000,
           "manager_factory": "org.datanucleus.api.jdo.JDOPersistenceManagerFactory",
@@ -121,7 +121,7 @@
           "read_timeout": 30000,
           "type": "mysql",
           "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
-          "use_config": "maxPerformance",
+          "use_config": "fullDebug",
           "username": "root",
           "write_timeout": 30000
         },
@@ -131,7 +131,7 @@
           "credstore_port": 5768,
           "dbname": "starbucks",
           "driver_name": "com.mysql.cj.jdbc.Driver",
-          "host": "localhost",
+          "host": "mysql-server",
           "idle_timeout": 60000,
           "leak_detection_threshold": 30000,
           "manager_factory": "org.datanucleus.api.jdo.JDOPersistenceManagerFactory",
@@ -150,7 +150,7 @@
           "read_timeout": 30000,
           "type": "mysql",
           "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
-          "use_config": "maxPerformance",
+          "use_config": "fullDebug",
           "username": "root",
           "write_timeout": 30000
         }
@@ -177,7 +177,7 @@
           "read_timeout": 30000,
           "type": "h2",
           "url_optional_params": ";DATABASE_TO_UPPER=false;MODE=MySQL",
-          "use_config": "maxPerformance",
+          "use_config": "fullDebug",
           "username": "root",
           "write_timeout": 30000
         }

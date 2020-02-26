@@ -16,25 +16,22 @@ WORKDIR ${build_dir}
 # install dependencies
 COPY ./ ./
 
-#compile the source code
-RUN mvn clean install
-############################# Stage 2 - Deployment ######################
-
-FROM tomcat:8.5.16-jre8-alpine
-
+#Expose the port
 EXPOSE 8080
 
-RUN rm -rf /usr/local/tomcat/webapps/*
+#compile the source code
+RUN mvn clean install
 
-COPY --from=build app/starbucks-backend/api/target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
+WORKDIR api
 
-CMD ["catalina.sh","run"]
+# start up command
+CMD ["mvn","jetty:run"]
 
 #Build the image
-# docker build -t starbucks .
+# docker build -t sunil28/starbucks-backend .
 
 #Run the image
-# docker run -it -p 8080:8080 starbucks
+# docker run -it -p 8080:8080 sunil28/starbucks-backend mvn jetty:run
 
 #Enter into the container
 # docker exec -it 3274b10d06ee /bin/bash

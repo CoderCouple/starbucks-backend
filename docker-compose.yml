@@ -1,0 +1,35 @@
+version: '3.0'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql-server
+    command: --lower_case_table_names=1
+    volumes:
+      - "./:/starbucks-backend:delegated"
+    networks:
+      - starbucks_network
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  starbucks-backend:
+    build:
+      context: .
+      image: sunil28/starbucks-backend
+    container_name: starbucks-backend
+    volumes:
+      - "./:/starbucks-backend:delegated"
+      - "~/.m2:/root/.m2:delegated"
+    working_dir: /starbucks-backend
+    networks:
+      - starbucks_network
+    entrypoint: /bin/bash
+    environment:
+      - env=docker
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+networks:
+  starbucks_network: {}
+
