@@ -1,20 +1,20 @@
-# Starbucks-Backend
->This repository provides a sample backend code for creating a coffee ordering REST application like Starbucks. 
+# Starbucks-Backend :copyright:
+>This repository provides a sample backend code for creating a :coffee: ordering REST application like Starbucks. 
 
 ------------------------------------------------------------------------------------------------------------------
 
-## Local Setup:
+## Local Setup: :computer:
 
-### Pre-requisites:
+### Pre-requisites: 👀
 * Java-8
 * mysql 5.7 & above
 * IntelliJ IDE (Optional)
 
-### How to Compile:
+### How to Compile: :cloud:
 * Go to the parent project directory `cd starbucks-backend`
 * Run `mvn clean install`
 
-### How to Run:
+### How to Run: :fire:
 * Go to API directory `cd /starbucks-backend/api`
 * Run `mvn jetty:run` 
 
@@ -32,7 +32,7 @@
     
 
 ## Docker Setup:
->Coming Soon !!!
+>Coming Soon !!! :clock1:
 
 
 
@@ -51,3 +51,5 @@
 * Go to the url : http://localhost:8080/api/swagger.json
 * Click on the plugin icon in the browser  
 ![PluginIcon.png](common/src/main/resources/images/PluginIcon.png)
+
+
