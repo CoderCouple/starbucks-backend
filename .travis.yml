@@ -1,0 +1,10 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -f Dockerfile.dev -t sunil28/starbucks-backend .
+
+script:
+  - docker run -e CI=true sunil28/starbucks-backend mvn clean test
