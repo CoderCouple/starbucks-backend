@@ -23,7 +23,6 @@
 
 
 ### Database Schema: 
-<img src="/common/src/main/resources/images/DBSchemas.png", width=400, height= 400>
-![](common/src/main/resources/images/DBSchemas.png)
+![DBSchemas.png](common/src/main/resources/images/DBSchemas.png)
 
 ### How to generate Swagger documentation:
