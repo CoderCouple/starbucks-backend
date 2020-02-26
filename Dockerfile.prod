@@ -18,9 +18,14 @@ COPY ./ ./
 
 #Expose the port
 EXPOSE 8080
+EXPOSE 8000
 
 #compile the source code
 RUN mvn clean install
+
+ENV JPDA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"
+ENV JPDA_ADDRESS="8000"
+ENV JPDA_TRANSPORT="dt_socket"
 
 WORKDIR api
 

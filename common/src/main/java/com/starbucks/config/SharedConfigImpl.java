@@ -18,7 +18,7 @@ public class SharedConfigImpl implements SharedConfig {
         this.group = group;
         this.isMac = ("mac os x").equalsIgnoreCase(System.getProperty("os.name"));
         this.isDevEnv = ("dev").equalsIgnoreCase(getEnv("dev"));
-        this.env = Strings.isNullOrEmpty(System.getProperty("env")) ? Env.DEV.getName() : System.getProperty("env");
+        this.env = Strings.isNullOrEmpty(System.getenv("env")) ? Env.DEV.getName() : System.getenv("env");
     }
 
     public String getEnv(final String env) {

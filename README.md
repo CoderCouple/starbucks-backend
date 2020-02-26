@@ -40,7 +40,7 @@
         * `mysql < initDB.sql`
     * API  Setup (Use Separate terminal)
         * `docker exec -it starbucks-backend /bin/bash`
-        * `mvn clean insall`
+        * `mvn clean install`
         * `cd api && mvn jetty:run`
         
 * Run following commands to do a docker tear down
