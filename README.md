@@ -10,7 +10,7 @@
 * mysql 5.7 & above
 * IntelliJ IDE (Optional)
 
-### How to Compile: :cloud:
+### How to Compile: :hammer:
 * Go to the parent project directory `cd starbucks-backend`
 * Run `mvn clean install`
 
@@ -18,11 +18,11 @@
 * Go to API directory `cd /starbucks-backend/api`
 * Run `mvn jetty:run` 
 
-### How to Tets:
+### How to Tets: :wrench:
 * Go to parent project directory `cd /starbucks-backend`
 * Run `mvn clean test` 
 
-### Database Setup:
+### Database Setup: :white_check_mark:
 * Install MySql on your local
 * Create a database with name `starbucks`
 * Go to the directory `starbucks-backend/common/src/main/resources`
@@ -31,7 +31,7 @@
     * `"access": "Your Password Here"`
     
 
-## Docker Setup:
+## Docker Setup: :cloud:
 >Coming Soon !!! :clock1:
 
 
