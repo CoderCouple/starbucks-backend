@@ -34,11 +34,11 @@
 ## Docker Setup: :cloud:
 * Run following commands to do a docker setup`
     * `docker-compose up -d`
-    * Database  Setup (Use Separate terminal)
+    * Database  Setup (Use Separate terminal) :fire:
         * `docker cp ./initDB.sql mysql-server:/`
         * `docker exec -it mysql-server /bin/bash`
         * `mysql < initDB.sql`
-    * API  Setup (Use Separate terminal)
+    * API  Setup (Use Separate terminal) :hammer:
         * `docker exec -it starbucks-backend /bin/bash`
         * `mvn clean install`
         * `cd api && mvn jetty:run`
