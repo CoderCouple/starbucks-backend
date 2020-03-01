@@ -90,7 +90,8 @@
           "write_timeout": 30000
         }
       }
-    }
+    },
+    "whiteListedDomains": ["localhost:3000"]
   },
   "docker": {
     "env": "docker",
@@ -182,6 +183,7 @@
           "write_timeout": 30000
         }
       }
-    }
+    },
+    "whiteListedDomains": ["localhost:3000"]
   }
 }

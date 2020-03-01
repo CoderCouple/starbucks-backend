@@ -199,7 +199,7 @@ public class BaseJDOConfig extends Properties implements JDOConfig  {
     }
 
     protected String getConfigKey(final String key) {
-        String result = env + ".jdo." + this.groupName;
+        String result = "jdo." + this.groupName;
         if (this.configKeyGroup != null) {
             result = result + "." + this.configKeyGroup;
         }

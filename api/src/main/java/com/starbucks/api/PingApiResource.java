@@ -42,6 +42,7 @@ public class PingApiResource {
     })
     public Response ping() {
         String res = pingService.getPingResponse();
-        return Response.ok().entity("{\"data\":\"" + res + " from " + config.getString("appName") + "\"}").build();
+        System.out.println(config.getList("whiteListedDomains"));
+        return Response.ok().entity("{\"data\":\"" + res + " from " + config.appName("appName") + "\"}").build();
     }
 }

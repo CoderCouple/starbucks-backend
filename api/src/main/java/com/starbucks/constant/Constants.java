@@ -13,4 +13,21 @@ public class Constants {
    public static final String META = "meta";
    public static final String DEBUG = "debug";
 
+   // HTTP Constants
+   public static final String HTTP_HEADER_AUTHORIZATION = "Authorization";
+   public static final String HTTP_HEADER_CONTENT_TYPE = "Content-Type";
+   public static final String HTTP_HEADER_ORIGIN = "Origin";
+   public static final String HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+   public static final String HTTP_HEADER_ACCESS_CONTROL_MAX_AGE = "Access-Control-Max-Age";
+   public static final String HTTP_HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
+   public static final String HTTP_HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
+   public static final String HTTP_HEADER_ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
+   public static final String HTTP_HEADER_CRUMB = "X-CSRF-Token";
+   public static final String HTTP_HEADER_ACCEPT_LANGUAGE = "Accept-Language";
+   public static final String HTTP_HEADER_HOST = "Host";
+
+   public static final String HTTP_METHOD_GET = "GET";
+   public static final String HTTP_METHOD_OPTIONS = "OPTIONS";
+   public static final String WHITELISTED_DOMAIN = "whiteListedDomains";
+
 }
