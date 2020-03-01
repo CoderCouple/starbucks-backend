@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface SharedConfig {
 
+    String appName(String key);
+
     Boolean isMac();
 
     Boolean keyExists(String key);
