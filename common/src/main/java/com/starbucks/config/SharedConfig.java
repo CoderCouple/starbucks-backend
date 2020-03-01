@@ -1,5 +1,7 @@
 package com.starbucks.config;
 
+import java.util.List;
+
 public interface SharedConfig {
 
     Boolean isMac();
@@ -9,6 +11,8 @@ public interface SharedConfig {
     Boolean isDevEnv();
 
     Group getGroup();
+
+    List<String> getList(String key);
 
     String getEnv();
 

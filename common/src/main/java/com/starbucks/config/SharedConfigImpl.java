@@ -3,6 +3,9 @@ package com.starbucks.config;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SharedConfigImpl implements SharedConfig {
 
     private final ConfigReader configReader;
@@ -94,6 +97,13 @@ public class SharedConfigImpl implements SharedConfig {
     @Override
     public Group getGroup() {
         return this.group;
+    }
+
+    @Override
+    public List<String> getList(final String key) {
+        List<String> list = new ArrayList<>();
+        configReader.config.getList(key).forEach(k -> list.add(k.toString()));
+        return list;
     }
 
     @Override

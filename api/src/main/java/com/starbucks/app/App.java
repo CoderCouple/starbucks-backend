@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
 import com.google.inject.servlet.ServletModule;
+import com.starbucks.cors.SimpleCorsFilter;
 import com.starbucks.guice.ApiBaseModule;
 import com.starbucks.request.ObjectMapperContextResolver;
 import io.swagger.jaxrs.config.BeanConfig;
@@ -19,6 +20,8 @@ import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.HttpMethod;
+import javax.ws.rs.core.HttpHeaders;
 
 @ApplicationPath("api")
 public class App extends ResourceConfig {
@@ -26,7 +29,7 @@ public class App extends ResourceConfig {
     public App(final ServiceLocator serviceLocator) {
 
         // Packages to Scan for Jersey Resources
-        packages(true , "com.starbucks.api");
+        packages(true, "com.starbucks.api");
         packages(true, "com.starbucks.exception.mapper");
 
         // Jackson
@@ -39,7 +42,21 @@ public class App extends ResourceConfig {
 
         // Register Filters
 
+
         // CORSFilter
+        register(SimpleCorsFilter.newBuilder()
+                .allowOriginDomain("localhost")
+                .allowCredentials()
+                .allowMethod(HttpMethod.GET)
+                .allowMethod(HttpMethod.OPTIONS)
+                .allowMethod(HttpMethod.POST)
+                .allowMethod(HttpMethod.PUT)
+                .allowHeader(HttpHeaders.CONTENT_TYPE)
+                .build());
+
+
+        // Jersey Event Listener
+
 
         // Swagger
         register(ApiListingResource.class);
@@ -66,7 +83,7 @@ public class App extends ResourceConfig {
     }
 
     private Module[] getBaseModule() {
-        return new Module [] {
+        return new Module[]{
                 new ServletModule(),
                 new ApiBaseModule()
         };
@@ -87,7 +104,7 @@ public class App extends ResourceConfig {
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("com.starbucks.api");
-        beanConfig.setDescription("Provides the list of APIs Starbucks backend");
+        beanConfig.setDescription("Provides the list of APIs for Starbucks backend");
         beanConfig.setTitle("Starbucks Backend API");
         beanConfig.setScan(true);
         return beanConfig;
