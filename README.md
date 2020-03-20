@@ -18,7 +18,7 @@
 * Go to API directory `cd /starbucks-backend/api`
 * Run `mvn jetty:run` 
 
-### How to Tets: :wrench:
+### How to Test: :wrench:
 * Go to parent project directory `cd /starbucks-backend`
 * Run `mvn clean test` 
 
@@ -32,7 +32,7 @@
     
 
 ## Docker Setup: :cloud:
-* Run following commands to do a docker setup`
+* Run following commands to do a docker setup
     * `docker-compose up -d`
     * Database  Setup (Use Separate terminal) :fire:
         * `docker cp ./initDB.sql mysql-server:/`
