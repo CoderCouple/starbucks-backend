@@ -51,7 +51,7 @@ public class UserApiResource {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "DUPLICATE USER FOUND")
     })
-    public Response register(@Valid final RegistrationPayload payload) {
+    public Response registerUser(@Valid final RegistrationPayload payload) {
         Map<String, String> registrationPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
         UserView user =  userService.registerUser(registrationPayloadMap);
         return Response.ok().entity(user).build();
@@ -67,7 +67,7 @@ public class UserApiResource {
             @ApiResponse(code = 404, message = "USER NOT FOUND"),
             @ApiResponse(code = 401, message = "UNAUTHORIZED ACCESS")
     })
-    public Response login(@Valid final LoginPayload payload) {
+    public Response loginUser(@Valid final LoginPayload payload) {
         Map<String, String> loginPayloadMap = new ObjectMapper().convertValue(payload, new TypeReference<Map<String, String>>() { });
         UserProfileView userProfileView =  userService.loginUser(loginPayloadMap);
         return Response.ok().entity(userProfileView).build();
@@ -82,7 +82,7 @@ public class UserApiResource {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "USER NOT FOUND")
     })
-    public Response logout(@ApiParam(value = "User Id", required = true) @PathParam("userId") final int userId) {
+    public Response logoutUser(@ApiParam(value = "User Id", required = true) @PathParam("userId") final int userId) {
         boolean isSuccessful =  userService.logoutUser(userId);
         if (isSuccessful) {
             return Response.ok().entity("{ \"data\" : " + "\"User successfully logged out !!!\"" + " }").build();
@@ -117,7 +117,7 @@ public class UserApiResource {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "USER NOT FOUND")
     })
-    public Response history(@ApiParam(value = "User Id", required = true) @PathParam("userId") final int userId) {
+    public Response getHistory(@ApiParam(value = "User Id", required = true) @PathParam("userId") final int userId) {
         UserOrderHistoryView userOrderHistoryView =  userService.getUserHistory(userId);
         return Response.ok().entity(userOrderHistoryView).build();
     }

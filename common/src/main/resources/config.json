@@ -28,7 +28,7 @@
           "read_only": "true",
           "read_timeout": 30000,
           "type": "mysql",
-          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
+          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false",
           "use_config": "maxPerformance",
           "username": "root",
           "write_timeout": 30000
@@ -57,7 +57,7 @@
           "read_only": "false",
           "read_timeout": 30000,
           "type": "mysql",
-          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
+          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false",
           "use_config": "maxPerformance",
           "username": "root",
           "write_timeout": 30000
@@ -121,7 +121,7 @@
           "read_only": "true",
           "read_timeout": 30000,
           "type": "mysql",
-          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
+          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false",
           "use_config": "fullDebug",
           "username": "root",
           "write_timeout": 30000
@@ -150,7 +150,7 @@
           "read_only": "false",
           "read_timeout": 30000,
           "type": "mysql",
-          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false",
+          "url_optional_params": "?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false",
           "use_config": "fullDebug",
           "username": "root",
           "write_timeout": 30000
